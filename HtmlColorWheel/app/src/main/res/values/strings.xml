@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Html Color Wheel</string>
+
+    <string name="title">HTML Color App</string>
+    <string name="red">Red</string>
+    <string name="blue">Blue</string>
+    <string name="green">Green</string>
+    <string name="alpha">Alpha</string>
+    <string name="hex">Hexadecimal</string>
+    <string name="color">Color</string>
+    <string name="title_activity_saved_colors">SavedColors</string>
+    <string name="save">Save Color</string>
+    <string name="search">Search</string>
+    <string name="action_settings">Settings</string>
+</resources>
