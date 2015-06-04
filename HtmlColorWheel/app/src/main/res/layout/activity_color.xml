@@ -194,19 +194,5 @@
                 android:background="@color/white" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:gravity="left">
-            <Button
-                android:id="@+id/save_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onClick"
-                android:background="@color/silver"
-                android:text="@string/save"/>
-        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

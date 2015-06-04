@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -19,7 +18,6 @@ public class ColorActivity extends Activity {
     EditText hexValue;
     Color color;
     TextView colorValue;
-    Button saveButton;
     SeekThread thread;
     SeekBar rSeekBar;
     SeekBar bSeekBar;
@@ -40,7 +38,6 @@ public class ColorActivity extends Activity {
         bSeekBar = (SeekBar) findViewById(R.id.seekBar_blue);
         gSeekBar = (SeekBar) findViewById(R.id.seekBar_green);
         aSeekBar = (SeekBar) findViewById(R.id.seekBar_alpha);
-        saveButton = (Button) findViewById(R.id.save_button);
         color = new Color();
 
         thread = new SeekThread();
