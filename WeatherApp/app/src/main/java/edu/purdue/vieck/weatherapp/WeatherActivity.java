@@ -1,8 +1,11 @@
 package edu.purdue.vieck.weatherapp;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,11 +16,18 @@ import org.json.JSONException;
 public class WeatherActivity extends Activity {
 
     HelperMethods httpRequest;
+    private Handler updateHandler;
+    private int interval = 10000;
+    Context context;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
+        context = this;
+        updateHandler = new Handler();
+        runUIThread();
     }
 
     @Override
@@ -42,22 +52,35 @@ public class WeatherActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    class JSONRequestTask extends AsyncTask<Void, Void, Void> {
+    Runnable UIThread = new Runnable() {
         @Override
-        protected Void doInBackground(Void... params) {
+        public void run() {
+            new JSONRequestTask().execute();
+            updateHandler.postDelayed(UIThread, interval);
+        }
+    };
+
+    void runUIThread() {
+        UIThread.run();
+    }
+
+    class JSONRequestTask extends AsyncTask<Void, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Void... params) {
             try {
-            httpRequest = new HelperMethods(getApplicationContext(), "http://api.openweathermap.org/data/2.5/weather?q=West%20Lafayette&units=imperial");
-            httpRequest.seperateJSON(httpRequest.makeRequest());
-            } catch (JSONException e){
-                Log.e("Error","JSON Error");
+                httpRequest = new HelperMethods(context, "http://api.openweathermap.org/data/2.5/weather?q=West%20Lafayette&units=imperial");
+                return httpRequest.seperateJSON(httpRequest.makeRequest());
+            } catch (JSONException e) {
+                Log.e("Error", "JSON Error");
             }
-            return null;
+            return false;
         }
 
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            httpRequest.updateScreen();
+        protected void onPostExecute(Boolean bool) {
+            if (bool)
+                httpRequest.updateScreen();
         }
     }
 

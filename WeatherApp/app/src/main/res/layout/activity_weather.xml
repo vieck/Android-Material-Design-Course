@@ -19,10 +19,6 @@
         android:text="@string/location"
         android:textColor="#000000" />
 
-    <android.support.v7.widget.CardView>
-
-    </android.support.v7.widget.CardView>
-
     <RelativeLayout
         android:id="@+id/temp_layout"
         android:layout_width="wrap_content"
@@ -38,8 +34,8 @@
 
         <ImageView
             android:id="@+id/condIcon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_alignTop="@id/temp"
             android:layout_toRightOf="@id/temp"
             android:src="@mipmap/ic_launcher" />
@@ -49,10 +45,7 @@
             style="@style/textSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/temp"
-            android:layout_alignLeft="@id/condIcon"
-            android:layout_alignStart="@id/condIcon"
-            android:layout_toRightOf="@id/temp" />
+            android:layout_below="@id/condIcon"/>
 
         <TextView
             android:id="@+id/descrWeather"
@@ -215,7 +208,7 @@
         android:layout_height="32dp"
         android:layout_below="@id/sunIcon"
         android:layout_marginTop="10dp"
-        android:src="@drawable/moon" />
+        android:src="@drawable/moon_icon" />
 
     <TextView
         android:id="@+id/sunset"
@@ -237,5 +230,4 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="@string/provider" />
-
 </RelativeLayout>

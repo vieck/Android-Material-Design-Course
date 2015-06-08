@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="android:Theme.Material.Light">
-        <item name="android:colorPrimary">#d73dff</item>
-        <item name="android:colorPrimaryDark">#00ff96</item>
+    <style name="AppDay" parent="android:Theme.Material.Light">
+        <item name="android:colorPrimary">#008dff</item>
+        <item name="android:colorPrimaryDark">#0e00ff</item>
         <item name="android:colorAccent">#caff00</item>
+
+    </style>
+
+    <style name="AppDusk" parent="android:Theme.Material.Light">
+        <item name="android:colorPrimary">#ff836b</item>
+        <item name="android:colorPrimaryDark">#3200ff</item>
+        <item name="android:colorAccent">#ff7200</item>
+    </style>
+    <style name="AppNight" parent="android:ThemeOverlay.Material.Dark">
+        <item name="android:colorPrimary">#3e0091</item>
+        <item name="android:colorPrimaryDark">#000000</item>
+        <item name="android:textColor">#ffffff</item>
     </style>
 </resources>

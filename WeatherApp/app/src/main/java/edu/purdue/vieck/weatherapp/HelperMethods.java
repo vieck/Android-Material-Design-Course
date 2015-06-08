@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -28,17 +29,19 @@ public class HelperMethods {
     Context context;
     String url;
     String country, description, main, name, icon;
-    int id, sunrise, sunset;
+    int id, sunrise, sunset, visibility;
     double speed, degree, humidity, latitude, longitude, temperature, pressure, min_temp, max_temp;
 
     /* Views **/
     TextView txtCity, txtTemp, txtDescription, txtMinTemp, txtMaxTemp, txtWindSpeed,
             txtWindDegree, txtHumidity, txtPressure, txtVisibility, txtSunrise, txtSunset;
+    ImageView imgCondition;
 
     public HelperMethods(Context context, String url) {
         this.context = context;
-        rootView = ((Activity) context).getWindow().getDecorView().findViewById(android.R.id.content);
+        rootView = ((Activity) context).getWindow().getDecorView().getRootView();
         this.url = url;
+        imgCondition = (ImageView) rootView.findViewById(R.id.condIcon);
         txtCity = (TextView) rootView.findViewById(R.id.cityText);
         txtTemp = (TextView) rootView.findViewById(R.id.descrWeather);
         txtMinTemp = (TextView) rootView.findViewById(R.id.tempMin);
@@ -75,50 +78,99 @@ public class HelperMethods {
         return null;
     }
 
-    public void seperateJSON(JSONObject json) throws JSONException {
-        JSONObject coordinates = json.getJSONObject("coord");
-        longitude = coordinates.getDouble("lon");
-        latitude = coordinates.getDouble("lat");
+    public boolean seperateJSON(JSONObject json) throws JSONException {
+        if (json != null) {
+            JSONObject coordinates = json.getJSONObject("coord");
+            longitude = coordinates.getDouble("lon");
+            latitude = coordinates.getDouble("lat");
 
-        JSONObject sys = json.getJSONObject("sys");
-        country = sys.getString("country");
-        sunrise = sys.getInt("sunrise");
-        sunset = sys.getInt("sunset");
+            JSONObject sys = json.getJSONObject("sys");
+            country = sys.getString("country");
+            sunrise = sys.getInt("sunrise");
+            sunset = sys.getInt("sunset");
 
-        JSONArray weatherArray = json.getJSONArray("weather");
-        if (weatherArray.length() > 0) {
-            JSONObject weather = weatherArray.getJSONObject(0);
-            id = weather.getInt("id");
-            main = weather.getString("main");
-            description = weather.getString("description");
-            icon = weather.getString("icon");
+            JSONArray weatherArray = json.getJSONArray("weather");
+            if (weatherArray.length() > 0) {
+                JSONObject weather = weatherArray.getJSONObject(0);
+                id = weather.getInt("id");
+                main = weather.getString("main");
+                description = weather.getString("description");
+                icon = weather.getString("icon");
+            }
+
+            JSONObject main = json.getJSONObject("main");
+            temperature = main.getDouble("temp");
+            min_temp = main.getDouble("temp_min");
+            max_temp = main.getDouble("temp_max");
+            pressure = main.getDouble("pressure");
+            humidity = main.getDouble("humidity");
+
+            JSONObject wind = json.getJSONObject("wind");
+            speed = wind.getDouble("speed");
+            degree = wind.getDouble("deg");
+
+            visibility = json.getJSONObject("clouds").getInt("all");
+
+            name = json.getString("name");
+            return true;
+        } else {
+            return false;
         }
-
-        JSONObject main = json.getJSONObject("main");
-        temperature = main.getDouble("temp");
-        min_temp = main.getDouble("temp_min");
-        max_temp = main.getDouble("temp_max");
-        pressure = main.getDouble("pressure");
-        humidity = main.getDouble("humidity");
-
-        JSONObject wind = json.getJSONObject("wind");
-        speed = wind.getDouble("speed");
-        degree = wind.getDouble("deg");
-
-        name = json.getString("name");
     }
 
     public void updateScreen() {
+        id = id / 100;
+        if (icon.contains("d")) {
+            switch (id) {
+                case 2:
+                    imgCondition.setImageResource(R.drawable.thunderstorms);
+                    break;
+                case 3:
+                    imgCondition.setImageResource(R.drawable.slight_drizzle);
+                    break;
+                case 5:
+                    imgCondition.setImageResource(R.drawable.drizzle);
+                    break;
+                case 6:
+                    imgCondition.setImageResource(R.drawable.snow);
+                    break;
+                case 7:
+                    imgCondition.setImageResource(R.drawable.fog);
+                    break;
+                case 8:
+                    imgCondition.setImageResource(R.drawable.sunny);
+            }
+        } else {
+            switch (id) {
+                case 2:
+                    imgCondition.setImageResource(R.drawable.night_thunderstorms);
+                    break;
+                case 3:
+                    imgCondition.setImageResource(R.drawable.night_drizzle);
+                    break;
+                case 5:
+                    imgCondition.setImageResource(R.drawable.night_drizzle);
+                    break;
+                case 6:
+                    imgCondition.setImageResource(R.drawable.snow);
+                    break;
+                case 7:
+                    imgCondition.setImageResource(R.drawable.night_cloudy);
+                    break;
+                case 8:
+                    imgCondition.setImageResource(R.drawable.moon);
+            }
+        }
         txtCity.setText(name);
         txtTemp.setText(temperature + "");
         txtDescription.setText(description);
-        txtMinTemp.setText(min_temp+"℉");
-        txtMaxTemp.setText(max_temp+"℉");
-        txtWindSpeed.setText(speed+"");
-        txtWindDegree.setText(degree+"");
-        txtHumidity.setText(humidity+"%");
-        txtPressure.setText(pressure+"° HPA");
-        txtVisibility.setText("%");
+        txtMinTemp.setText(min_temp + "℉");
+        txtMaxTemp.setText(max_temp + "℉");
+        txtWindSpeed.setText(speed + "");
+        txtWindDegree.setText(degree + "");
+        txtHumidity.setText(humidity + "%");
+        txtPressure.setText(pressure + "° HPA");
+        txtVisibility.setText(visibility+"%");
         long time = sunrise * (long) 1000;
         Date date = new Date(time);
         SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss a yyyy");

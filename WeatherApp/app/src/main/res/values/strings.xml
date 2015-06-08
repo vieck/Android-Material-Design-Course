@@ -18,4 +18,14 @@
 
     <string name="provider">Data courtesy of open weather map</string>
     <string name="action_settings">Settings</string>
+    
+    <string-array name="unitArray">
+        <item>Fahrenheit</item>
+        <item>Celsius</item>
+    </string-array>
+
+    <string-array name="unitValues">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>
