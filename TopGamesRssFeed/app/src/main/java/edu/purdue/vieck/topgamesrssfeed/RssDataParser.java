@@ -1,5 +1,6 @@
 package edu.purdue.vieck.topgamesrssfeed;
 
+import android.util.Log;
 import android.util.Xml;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -7,54 +8,119 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by vieck on 6/7/15.
  */
 public class RssDataParser {
     private static final String ns = null;
-
-    public List<Item> parse(InputStream in) throws XmlPullParserException, IOException {
+    ArrayList<Item> items = new ArrayList<>();
+    protected ArrayList parse(InputStream inputStream) throws XmlPullParserException, IOException {
         try {
-            XmlPullParser parser = Xml.newPullParser();
-            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-            parser.setInput(in, null);
-            parser.nextTag();
-            return readRss(parser);
+            XmlPullParser xmlParser = Xml.newPullParser();
+            xmlParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            xmlParser.setInput(inputStream, null);
+            xmlParser.nextTag();
+            readFeed(xmlParser);
+            Log.d("RssDataParser","Array: "+ items.toString());
+            return items;
         } finally {
-            in.close();
+            inputStream.close();
         }
     }
 
-    private List<Item> readRss(XmlPullParser parser) throws IOException, XmlPullParserException {
-        List<Item> entries = new ArrayList<>();
+    public static class Item {
+        public final String title;
+        public final String link;
+        public final String description;
+        public final String pubDate;
 
-        parser.require(XmlPullParser.START_TAG, null, "rss");
-        while (parser.next() != XmlPullParser.END_TAG) {
-            if (parser.getEventType() != XmlPullParser.START_TAG) {
+        private Item(String title, String link, String description, String pubDate) {
+            this.title = title;
+            this.link = link;
+            this.description = description;
+            this.pubDate = pubDate;
+        }
+    }
+
+    private void readFeed(XmlPullParser xmlParser) throws XmlPullParserException, IOException {
+        xmlParser.require(XmlPullParser.START_TAG, ns, "rss");
+        while (xmlParser.next() != XmlPullParser.END_TAG) {
+            if (xmlParser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
             }
-            String name = parser.getName();
-            // Starts by looking for the channel tag
-            if (name.equals("channel")) {
-                return readChannel(parser);
+            String tagName = xmlParser.getName();
+            if (tagName.equals("channel")) {
+                readChannel(xmlParser);
             } else {
-                skip(parser);
+                skip(xmlParser);
             }
         }
-        return entries;
     }
 
-    private void skip(XmlPullParser parser) throws XmlPullParserException, IOException {
-        if (parser.getEventType() != XmlPullParser.START_TAG) {
+    private void readChannel(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException{
+        xmlPullParser.require(XmlPullParser.START_TAG, ns, "channel");
+        while (xmlPullParser.next() != XmlPullParser.END_TAG) {
+            if (xmlPullParser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            String tagName = xmlPullParser.getName();
+            if (tagName.equals("item")) {
+                readItems(xmlPullParser);
+            } else {
+                skip(xmlPullParser);
+            }
+        }
+    }
+
+    private void readItems(XmlPullParser xmlParser) throws XmlPullParserException, IOException {
+        xmlParser.require(XmlPullParser.START_TAG, ns, "item");
+        String title = null;
+        String link = null;
+        String description = null;
+        String pubData = null;
+        while (xmlParser.next() != XmlPullParser.END_TAG) {
+            if (xmlParser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            String name = xmlParser.getName();
+            if (name.equals("title")) {
+                title = readString(xmlParser, "title");
+            } else if (name.equals("link")) {
+                link = readString(xmlParser, "link");
+            } else if (name.equals("description")) {
+                description = readString(xmlParser, "description");
+            } else if (name.equals("pubData")) {
+                pubData = readString(xmlParser, "pubData");
+            }
+        }
+        items.add(new Item(title, link, description, pubData));
+    }
+
+    private String readString(XmlPullParser xmlParser, String tag) throws XmlPullParserException, IOException {
+        xmlParser.require(XmlPullParser.START_TAG, ns, tag);
+        String title = readText(xmlParser);
+        xmlParser.require(XmlPullParser.END_TAG, ns, tag);
+        return title;
+    }
+
+    private String readText(XmlPullParser xmlParser) throws XmlPullParserException, IOException {
+        String result = "";
+        if (xmlParser.next() == XmlPullParser.TEXT) {
+            result = xmlParser.getText();
+            xmlParser.nextTag();
+        }
+        return result;
+    }
+
+    private void skip(XmlPullParser xmlParser) throws XmlPullParserException, IOException {
+        if (xmlParser.getEventType() != XmlPullParser.START_TAG) {
             throw new IllegalStateException();
         }
         int depth = 1;
         while (depth != 0) {
-            switch (parser.next()) {
+            switch (xmlParser.next()) {
                 case XmlPullParser.END_TAG:
                     depth--;
                     break;
@@ -62,114 +128,6 @@ public class RssDataParser {
                     depth++;
                     break;
             }
-        }
-    }
-
-    private List<Item> readChannel(XmlPullParser parser)
-            throws IOException, XmlPullParserException {
-
-        List<Item> entries = new ArrayList<>();
-
-        parser.require(XmlPullParser.START_TAG, null, "channel");
-        while (parser.next() != XmlPullParser.END_TAG) {
-            if (parser.getEventType() != XmlPullParser.START_TAG) {
-                continue;
-            }
-            String name = parser.getName();
-            // Starts by looking for the entry tag
-            if (name.equals("item")) {
-                entries.add(readItem(parser));
-            } else {
-                skip(parser);
-            }
-        }
-        return entries;
-    }
-
-    private Item readItem(XmlPullParser parser) throws IOException, XmlPullParserException {
-        parser.require(XmlPullParser.START_TAG, ns, "item");
-        String title = null;
-        String link = null;
-        String description = null;
-        String pubDate = null;
-
-        while (parser.next() != XmlPullParser.END_TAG) {
-            if (parser.getEventType() != XmlPullParser.START_TAG) {
-                continue;
-            }
-            String name = parser.getName();
-            switch (name) {
-                case "title":
-                    title = readTitle(parser);
-                    break;
-                case "link":
-                    link = readLink(parser);
-                    break;
-                case "description":
-                    description = readDescription(parser);
-                    break;
-                case "pubDate":
-                    pubDate = readPubDate(parser);
-                    break;
-                default:
-                    skip(parser);
-                    break;
-            }
-        }
-
-        return new Item(title, link, description, pubDate);
-    }
-
-    private String readPubDate(XmlPullParser parser) throws IOException, XmlPullParserException {
-        return readRequiredTag(parser, "pubDate");
-    }
-
-    private String readDescription(XmlPullParser parser)
-            throws IOException, XmlPullParserException {
-        return readRequiredTag(parser, "description");
-    }
-
-    private String readLink(XmlPullParser parser) throws IOException, XmlPullParserException {
-        return readRequiredTag(parser, "link");
-    }
-
-    private String readRequiredTag(XmlPullParser parser, String tag)
-            throws IOException, XmlPullParserException {
-        parser.require(XmlPullParser.START_TAG, ns, tag);
-        String result = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, tag);
-        return result;
-    }
-
-    private String readTitle(XmlPullParser parser) throws IOException, XmlPullParserException {
-        return readRequiredTag(parser, "title");
-    }
-
-    private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
-        String result = "";
-        if (parser.next() == XmlPullParser.TEXT) {
-            result = parser.getText();
-            parser.nextTag();
-        }
-        return result;
-    }
-
-    public static class Item implements Serializable {
-        public final String title;
-        public final String link;
-        public final String description;
-        public final String pubDate;
-
-        public Item(String title, String link, String description, String pubDate) {
-            this.title = title;
-            this.link = link;
-            this.description = description;
-            this.pubDate = pubDate;
-        }
-
-        @Override
-        public String toString() {
-            return "{" + title + "," + link + "," + description + "," + pubDate + "}";
         }
     }
 }

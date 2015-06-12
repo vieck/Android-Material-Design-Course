@@ -5,13 +5,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.net.MalformedURLException;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
+
+import edu.purdue.vieck.topgamesrssfeed.RssDataParser.Item;
 
 
 public class RssActivity extends Activity {
@@ -33,13 +39,11 @@ public class RssActivity extends Activity {
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("First");
-        arrayList.add("Second");
-        arrayList.add("Third");
+        ArrayList<Item> arrayList = new ArrayList<>();
         // specify an adapter (see also next example)
         mAdapter = new RecycleAdapter(arrayList);
         mRecyclerView.setAdapter(mAdapter);
+        new GetRssFeedTask().execute();
     }
 
     @Override
@@ -64,15 +68,69 @@ public class RssActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class GetRssFeedTask extends AsyncTask<Void, Void, List<RssDataParser.Item>> {
+    private class GetRssFeedTask extends AsyncTask<Void, Void, ArrayList<Item>> {
         @Override
-        protected List<RssDataParser.Item> doInBackground(Void... params) {
+        protected ArrayList<Item> doInBackground(Void... params) {
             try {
-                URL url = new URL("http://www.androidpit.com/feed/main.xml");
-            } catch (MalformedURLException e) {
-
+                //http://www.reuters.com/rssFeed/scienceNews
+                return loadXmlFromNetwork("http://www.gamespot.com/feeds/new-games/");
+            } catch (IOException e) {
+                Log.d("Error","IOException: "+e.getMessage());
+            } catch (XmlPullParserException e) {
+                Log.d("Error","XmlException "+e.getMessage());
             }
             return null;
         }
+
+        @Override
+        protected void onPostExecute(ArrayList<Item> items) {
+            if (items != null) {
+                Log.d("ArrayList","Items:"+items.toString());
+            } else {
+                Log.e("OnPostExecute","ArrayList is null");
+            }
+        }
+    }
+
+    // Uploads XML from stackoverflow.com, parses it, and combines it with
+    // HTML markup. Returns HTML string.
+    private ArrayList loadXmlFromNetwork(String urlString) throws XmlPullParserException, IOException {
+        InputStream stream = null;
+        // Instantiate the parser
+        RssDataParser rssDataParser = new RssDataParser();
+        ArrayList<Item> entries = null;
+
+        try {
+            stream = downloadUrl(urlString);
+            entries = rssDataParser.parse(stream);
+            return entries;
+            // Makes sure that the InputStream is closed after the app is
+            // finished using it.
+        } finally {
+            if (stream != null) {
+                stream.close();
+            }
+
+        }
+    }
+
+    // Given a string representation of a URL, sets up a connection and gets
+// an input stream.
+    private InputStream downloadUrl(String urlString) throws IOException {
+        URL url = new URL(urlString);
+        HttpURLConnection huc = (HttpURLConnection) url.openConnection();
+        HttpURLConnection.setFollowRedirects(false);
+        huc.setConnectTimeout(15 * 1000);
+        huc.setRequestMethod("GET");
+        huc.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)");
+        huc.connect();
+        InputStream inputStream = huc.getInputStream();
+        /*BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuilder builder = new StringBuilder();
+        String input=null;
+        while ((input = reader.readLine()) != null) {
+            builder.append(input);
+        }**/
+        return inputStream;
     }
 }

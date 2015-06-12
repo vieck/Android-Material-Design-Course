@@ -13,28 +13,33 @@ import java.util.ArrayList;
  */
 public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder> {
 
-    private ArrayList<String> mDataset;
+    private ArrayList<RssDataParser.Item> mDataset;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView rssText;
+        TextView rssTitle, rssDescription;
         public ViewHolder(View v) {
             super(v);
-            rssText = (TextView) v.findViewById(R.id.xml_data);
+            rssTitle = (TextView) v.findViewById(R.id.item_title);
+            rssDescription = (TextView) v.findViewById(R.id.item_description);
         }
     }
 
-    public void add(int position, String item) {
+    public void add(int position, RssDataParser.Item item) {
         mDataset.add(position, item);
         notifyItemInserted(position);
     }
 
-    public void remove(String item) {
+    public void remove(RssDataParser.Item item) {
         int position = mDataset.indexOf(item);
         mDataset.remove(position);
         notifyItemRemoved(position);
     }
 
-    public RecycleAdapter(ArrayList<String> mDataset) {
+    public void clear() {
+        mDataset.clear();
+    }
+
+    public RecycleAdapter(ArrayList<RssDataParser.Item> mDataset) {
         this.mDataset = mDataset;
     }
 
@@ -47,8 +52,9 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final String name = mDataset.get(position);
-        holder.rssText.setText(name);
+        final RssDataParser.Item item = mDataset.get(position);
+        holder.rssTitle.setText(item.title);
+        holder.rssDescription.setText(item.description);
     }
 
     @Override
