@@ -9,56 +9,170 @@ package com.examples.youtubeapidemo;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cardBackgroundColor=0x7f010000;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cardCornerRadius=0x7f010001;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cardElevation=0x7f010002;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cardMaxElevation=0x7f010003;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cardPreventCornerOverlap=0x7f010005;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cardUseCompatPadding=0x7f010004;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int contentPadding=0x7f010006;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int contentPaddingBottom=0x7f01000a;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int contentPaddingLeft=0x7f010007;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int contentPaddingRight=0x7f010008;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int contentPaddingTop=0x7f010009;
     }
     public static final class color {
-        public static final int gray=0x7f050000;
+        public static final int cardview_dark_background=0x7f050000;
+        public static final int cardview_light_background=0x7f050001;
+        public static final int cardview_shadow_end_color=0x7f050002;
+        public static final int cardview_shadow_start_color=0x7f050003;
+        public static final int gray=0x7f050004;
+    }
+    public static final class dimen {
+        public static final int cardview_compat_inset_shadow=0x7f060000;
+        public static final int cardview_default_elevation=0x7f060001;
+        public static final int cardview_default_radius=0x7f060002;
     }
     public static final class drawable {
         public static final int loading_thumbnail=0x7f020000;
         public static final int no_thumbnail=0x7f020001;
     }
     public static final class id {
-        public static final int autoplay_checkbox=0x7f060020;
-        public static final int close_button=0x7f060025;
-        public static final int container=0x7f060022;
-        public static final int demo_list=0x7f060004;
-        public static final int event_log=0x7f06001a;
-        public static final int fullscreen_button=0x7f06000b;
-        public static final int intent_list=0x7f06000c;
-        public static final int landscape_fullscreen_checkbox=0x7f06000a;
-        public static final int layout=0x7f060007;
-        public static final int lightbox_checkbox=0x7f060021;
-        public static final int list_fragment=0x7f060023;
-        public static final int list_item_disabled_text=0x7f06000f;
-        public static final int list_item_text=0x7f06000e;
-        public static final int other_views=0x7f060009;
-        public static final int pause_button=0x7f060012;
-        public static final int play_button=0x7f060011;
-        public static final int player=0x7f060008;
-        public static final int player_fragment=0x7f060002;
-        public static final int player_view=0x7f060000;
-        public static final int skip_to_text=0x7f060013;
-        public static final int some_demos_disabled_text=0x7f060005;
-        public static final int start_index_text=0x7f06001e;
-        public static final int start_playlist_button=0x7f06001c;
-        public static final int start_time_text=0x7f06001f;
-        public static final int start_video_button=0x7f06001b;
-        public static final int start_video_list_button=0x7f06001d;
-        public static final int state_text=0x7f060014;
-        public static final int style_chromeless=0x7f060019;
-        public static final int style_default=0x7f060017;
-        public static final int style_minimal=0x7f060018;
-        public static final int style_radio_group=0x7f060016;
-        public static final int text=0x7f060028;
-        public static final int thumbnail=0x7f060027;
-        public static final int tutorial_text=0x7f060003;
-        public static final int video_box=0x7f060024;
-        public static final int video_chooser=0x7f060010;
-        public static final int video_fragment_container=0x7f060026;
-        public static final int view_container=0x7f060001;
-        public static final int youtube_fragment=0x7f060006;
-        public static final int youtube_version_text=0x7f06000d;
-        public static final int youtube_view=0x7f060015;
+        public static final int autoplay_checkbox=0x7f070020;
+        public static final int close_button=0x7f070025;
+        public static final int container=0x7f070022;
+        public static final int demo_list=0x7f070004;
+        public static final int event_log=0x7f07001a;
+        public static final int fullscreen_button=0x7f07000b;
+        public static final int intent_list=0x7f07000c;
+        public static final int landscape_fullscreen_checkbox=0x7f07000a;
+        public static final int layout=0x7f070007;
+        public static final int lightbox_checkbox=0x7f070021;
+        public static final int list_fragment=0x7f070023;
+        public static final int list_item_disabled_text=0x7f07000f;
+        public static final int list_item_text=0x7f07000e;
+        public static final int other_views=0x7f070009;
+        public static final int pause_button=0x7f070012;
+        public static final int play_button=0x7f070011;
+        public static final int player=0x7f070008;
+        public static final int player_fragment=0x7f070002;
+        public static final int player_view=0x7f070000;
+        public static final int skip_to_text=0x7f070013;
+        public static final int some_demos_disabled_text=0x7f070005;
+        public static final int start_index_text=0x7f07001e;
+        public static final int start_playlist_button=0x7f07001c;
+        public static final int start_time_text=0x7f07001f;
+        public static final int start_video_button=0x7f07001b;
+        public static final int start_video_list_button=0x7f07001d;
+        public static final int state_text=0x7f070014;
+        public static final int style_chromeless=0x7f070019;
+        public static final int style_default=0x7f070017;
+        public static final int style_minimal=0x7f070018;
+        public static final int style_radio_group=0x7f070016;
+        public static final int text=0x7f070028;
+        public static final int thumbnail=0x7f070027;
+        public static final int tutorial_text=0x7f070003;
+        public static final int video_box=0x7f070024;
+        public static final int video_chooser=0x7f070010;
+        public static final int video_fragment_container=0x7f070026;
+        public static final int view_container=0x7f070001;
+        public static final int youtube_fragment=0x7f070006;
+        public static final int youtube_version_text=0x7f07000d;
+        public static final int youtube_view=0x7f070015;
     }
     public static final class layout {
         public static final int action_bar_demo=0x7f030000;
@@ -75,53 +189,264 @@ public final class R {
         public static final int video_list_item=0x7f03000b;
     }
     public static final class string {
-        public static final int action_bar_demo_name=0x7f070000;
-        public static final int actionbar_tutorial=0x7f070001;
-        public static final int autoplay=0x7f070002;
-        public static final int chromeless=0x7f070003;
-        public static final int def=0x7f070004;
-        public static final int demo_select=0x7f070005;
-        public static final int enter_fullscreen=0x7f070006;
-        public static final int error_player=0x7f070007;
-        public static final int error_thumbnail_view=0x7f070008;
-        public static final int fragment_demo_name=0x7f070009;
-        public static final int fullscreen_demo_name=0x7f07000a;
-        public static final int fullscreen_tutorial=0x7f07000b;
-        public static final int intent_disabled=0x7f07000c;
-        public static final int intent_select=0x7f07000d;
-        public static final int intents_demo_name=0x7f07000e;
-        public static final int isLaunchableActivity=0x7f07000f;
-        public static final int landscape_fullscreen=0x7f070010;
-        public static final int lightbox_mode=0x7f070011;
-        public static final int list_item_disabled=0x7f070012;
-        public static final int loggingTag=0x7f070013;
-        public static final int minVersion=0x7f070014;
-        public static final int minimal=0x7f070015;
-        public static final int pause=0x7f070016;
-        public static final int play=0x7f070017;
-        public static final int play_playlist=0x7f070018;
-        public static final int play_video=0x7f070019;
-        public static final int play_video_list=0x7f07001a;
-        public static final int player_controls_demo_name=0x7f07001b;
-        public static final int player_style=0x7f07001c;
-        public static final int playerfragment_text=0x7f07001d;
-        public static final int playerview_demo_name=0x7f07001e;
-        public static final int playerview_text=0x7f07001f;
-        public static final int seconds=0x7f070020;
-        public static final int skip_to=0x7f070021;
-        public static final int some_demos_disabled=0x7f070022;
-        public static final int standalone_player_demo_name=0x7f070023;
-        public static final int start_index=0x7f070024;
-        public static final int start_time=0x7f070025;
-        public static final int videolist_demo_name=0x7f070026;
-        public static final int videowall_demo_name=0x7f070027;
-        public static final int youtube_api_demo=0x7f070028;
-        public static final int youtube_currently_installed=0x7f070029;
-        public static final int youtube_not_installed=0x7f07002a;
+        public static final int action_bar_demo_name=0x7f080000;
+        public static final int actionbar_tutorial=0x7f080001;
+        public static final int autoplay=0x7f080002;
+        public static final int chromeless=0x7f080003;
+        public static final int def=0x7f080004;
+        public static final int demo_select=0x7f080005;
+        public static final int enter_fullscreen=0x7f080006;
+        public static final int error_player=0x7f080007;
+        public static final int error_thumbnail_view=0x7f080008;
+        public static final int fragment_demo_name=0x7f080009;
+        public static final int fullscreen_demo_name=0x7f08000a;
+        public static final int fullscreen_tutorial=0x7f08000b;
+        public static final int intent_disabled=0x7f08000c;
+        public static final int intent_select=0x7f08000d;
+        public static final int intents_demo_name=0x7f08000e;
+        public static final int isLaunchableActivity=0x7f08000f;
+        public static final int landscape_fullscreen=0x7f080010;
+        public static final int lightbox_mode=0x7f080011;
+        public static final int list_item_disabled=0x7f080012;
+        public static final int loggingTag=0x7f080013;
+        public static final int minVersion=0x7f080014;
+        public static final int minimal=0x7f080015;
+        public static final int pause=0x7f080016;
+        public static final int play=0x7f080017;
+        public static final int play_playlist=0x7f080018;
+        public static final int play_video=0x7f080019;
+        public static final int play_video_list=0x7f08001a;
+        public static final int player_controls_demo_name=0x7f08001b;
+        public static final int player_style=0x7f08001c;
+        public static final int playerfragment_text=0x7f08001d;
+        public static final int playerview_demo_name=0x7f08001e;
+        public static final int playerview_text=0x7f08001f;
+        public static final int seconds=0x7f080020;
+        public static final int skip_to=0x7f080021;
+        public static final int some_demos_disabled=0x7f080022;
+        public static final int standalone_player_demo_name=0x7f080023;
+        public static final int start_index=0x7f080024;
+        public static final int start_time=0x7f080025;
+        public static final int videolist_demo_name=0x7f080026;
+        public static final int videowall_demo_name=0x7f080027;
+        public static final int youtube_api_demo=0x7f080028;
+        public static final int youtube_currently_installed=0x7f080029;
+        public static final int youtube_not_installed=0x7f08002a;
     }
     public static final class style {
         public static final int BlackNoBarsTheme=0x7f040000;
         public static final int BlackNoTitleBarTheme=0x7f040001;
+        public static final int CardView=0x7f040003;
+        public static final int CardView_Dark=0x7f040004;
+        public static final int CardView_Light=0x7f040005;
         public static final int OverlayActionBarTheme=0x7f040002;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a CardView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #CardView_cardBackgroundColor com.examples.youtubeapidemo:cardBackgroundColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardCornerRadius com.examples.youtubeapidemo:cardCornerRadius}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardElevation com.examples.youtubeapidemo:cardElevation}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardMaxElevation com.examples.youtubeapidemo:cardMaxElevation}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardPreventCornerOverlap com.examples.youtubeapidemo:cardPreventCornerOverlap}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardUseCompatPadding com.examples.youtubeapidemo:cardUseCompatPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPadding com.examples.youtubeapidemo:contentPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingBottom com.examples.youtubeapidemo:contentPaddingBottom}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingLeft com.examples.youtubeapidemo:contentPaddingLeft}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingRight com.examples.youtubeapidemo:contentPaddingRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingTop com.examples.youtubeapidemo:contentPaddingTop}</code></td><td></td></tr>
+           </table>
+           @see #CardView_cardBackgroundColor
+           @see #CardView_cardCornerRadius
+           @see #CardView_cardElevation
+           @see #CardView_cardMaxElevation
+           @see #CardView_cardPreventCornerOverlap
+           @see #CardView_cardUseCompatPadding
+           @see #CardView_contentPadding
+           @see #CardView_contentPaddingBottom
+           @see #CardView_contentPaddingLeft
+           @see #CardView_contentPaddingRight
+           @see #CardView_contentPaddingTop
+         */
+        public static final int[] CardView = {
+            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003,
+            0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007,
+            0x7f010008, 0x7f010009, 0x7f01000a
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.examples.youtubeapidemo.R.attr#cardBackgroundColor}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.examples.youtubeapidemo:cardBackgroundColor
+        */
+        public static final int CardView_cardBackgroundColor = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.examples.youtubeapidemo.R.attr#cardCornerRadius}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.examples.youtubeapidemo:cardCornerRadius
+        */
+        public static final int CardView_cardCornerRadius = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.examples.youtubeapidemo.R.attr#cardElevation}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.examples.youtubeapidemo:cardElevation
+        */
+        public static final int CardView_cardElevation = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.examples.youtubeapidemo.R.attr#cardMaxElevation}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.examples.youtubeapidemo:cardMaxElevation
+        */
+        public static final int CardView_cardMaxElevation = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.examples.youtubeapidemo.R.attr#cardPreventCornerOverlap}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.examples.youtubeapidemo:cardPreventCornerOverlap
+        */
+        public static final int CardView_cardPreventCornerOverlap = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.examples.youtubeapidemo.R.attr#cardUseCompatPadding}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.examples.youtubeapidemo:cardUseCompatPadding
+        */
+        public static final int CardView_cardUseCompatPadding = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.examples.youtubeapidemo.R.attr#contentPadding}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.examples.youtubeapidemo:contentPadding
+        */
+        public static final int CardView_contentPadding = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.examples.youtubeapidemo.R.attr#contentPaddingBottom}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.examples.youtubeapidemo:contentPaddingBottom
+        */
+        public static final int CardView_contentPaddingBottom = 10;
+        /**
+          <p>This symbol is the offset where the {@link com.examples.youtubeapidemo.R.attr#contentPaddingLeft}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.examples.youtubeapidemo:contentPaddingLeft
+        */
+        public static final int CardView_contentPaddingLeft = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.examples.youtubeapidemo.R.attr#contentPaddingRight}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.examples.youtubeapidemo:contentPaddingRight
+        */
+        public static final int CardView_contentPaddingRight = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.examples.youtubeapidemo.R.attr#contentPaddingTop}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.examples.youtubeapidemo:contentPaddingTop
+        */
+        public static final int CardView_contentPaddingTop = 9;
+    };
 }

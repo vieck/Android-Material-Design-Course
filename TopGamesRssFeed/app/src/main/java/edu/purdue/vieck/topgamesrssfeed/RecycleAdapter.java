@@ -1,10 +1,12 @@
 package edu.purdue.vieck.topgamesrssfeed;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,10 +17,16 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 
     private ArrayList<RssDataParser.Item> mDataset;
 
+    public RecycleAdapter(ArrayList<RssDataParser.Item> mDataset) {
+        this.mDataset = mDataset;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
+        CardView cardView;
         TextView rssTitle, rssDescription;
         public ViewHolder(View v) {
             super(v);
+            cardView = (CardView) v.findViewById(R.id.card_view);
             rssTitle = (TextView) v.findViewById(R.id.item_title);
             rssDescription = (TextView) v.findViewById(R.id.item_description);
         }
@@ -39,9 +47,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
         mDataset.clear();
     }
 
-    public RecycleAdapter(ArrayList<RssDataParser.Item> mDataset) {
-        this.mDataset = mDataset;
-    }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -51,8 +57,14 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final RssDataParser.Item item = mDataset.get(position);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(holder.cardView.getContext(), position+"", Toast.LENGTH_SHORT).show();
+            }
+        });
         holder.rssTitle.setText(item.title);
         holder.rssDescription.setText(item.description);
     }
@@ -61,4 +73,6 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
     public int getItemCount() {
         return mDataset.size();
     }
+
+
 }

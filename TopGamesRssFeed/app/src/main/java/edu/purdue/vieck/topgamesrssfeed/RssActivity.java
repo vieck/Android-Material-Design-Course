@@ -3,6 +3,8 @@ package edu.purdue.vieck.topgamesrssfeed;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,20 +24,29 @@ import edu.purdue.vieck.topgamesrssfeed.RssDataParser.Item;
 
 public class RssActivity extends Activity {
 
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private RecycleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rss_feed);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
-
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mAdapter.clear();
+                new GetRssFeedTask().execute();
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -49,7 +60,7 @@ public class RssActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_rss_feed, menu);
+        //getMenuInflater().inflate(R.menu.menu_rss_feed, menu);
         return true;
     }
 
@@ -61,7 +72,7 @@ public class RssActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-         if (id == R.id.action_settings) {
+        if (id == R.id.action_settings) {
             return true;
         }
 
@@ -73,11 +84,11 @@ public class RssActivity extends Activity {
         protected ArrayList<Item> doInBackground(Void... params) {
             try {
                 //http://www.reuters.com/rssFeed/scienceNews
-                return loadXmlFromNetwork("http://www.gamespot.com/feeds/new-games/");
+                return loadXmlFromNetwork("http://www.reuters.com/rssFeed/topNews");
             } catch (IOException e) {
-                Log.d("Error","IOException: "+e.getMessage());
+                Log.d("Error", "IOException: " + e.getMessage());
             } catch (XmlPullParserException e) {
-                Log.d("Error","XmlException "+e.getMessage());
+                Log.d("Error", "XmlException " + e.getMessage());
             }
             return null;
         }
@@ -85,9 +96,15 @@ public class RssActivity extends Activity {
         @Override
         protected void onPostExecute(ArrayList<Item> items) {
             if (items != null) {
-                Log.d("ArrayList","Items:"+items.toString());
+                Log.d("ArrayList", "Items:" + items.toString());
+                int itemsLength = items.size();
+                Log.d("Size", itemsLength + "");
+                for (int i = 0; i < itemsLength; i++) {
+                    mAdapter.add(i, items.get(i));
+                }
+                mAdapter.notifyDataSetChanged();
             } else {
-                Log.e("OnPostExecute","ArrayList is null");
+                Log.e("OnPostExecute", "ArrayList is null");
             }
         }
     }
@@ -125,12 +142,6 @@ public class RssActivity extends Activity {
         huc.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)");
         huc.connect();
         InputStream inputStream = huc.getInputStream();
-        /*BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        StringBuilder builder = new StringBuilder();
-        String input=null;
-        while ((input = reader.readLine()) != null) {
-            builder.append(input);
-        }**/
         return inputStream;
     }
 }

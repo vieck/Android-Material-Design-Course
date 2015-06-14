@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Top Games Rss Feed</string>
+    <string name="app_name">Top News</string>
 
     <string name="rss_title">RSS Feed</string>
     <string name="action_settings">Settings</string>

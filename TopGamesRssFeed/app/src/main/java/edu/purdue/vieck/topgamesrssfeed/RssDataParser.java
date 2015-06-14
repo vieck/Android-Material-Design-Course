@@ -36,7 +36,7 @@ public class RssDataParser {
         public final String description;
         public final String pubDate;
 
-        private Item(String title, String link, String description, String pubDate) {
+        public Item(String title, String link, String description, String pubDate) {
             this.title = title;
             this.link = link;
             this.description = description;
@@ -93,6 +93,8 @@ public class RssDataParser {
                 description = readString(xmlParser, "description");
             } else if (name.equals("pubData")) {
                 pubData = readString(xmlParser, "pubData");
+            } else {
+                skip(xmlParser);
             }
         }
         items.add(new Item(title, link, description, pubData));

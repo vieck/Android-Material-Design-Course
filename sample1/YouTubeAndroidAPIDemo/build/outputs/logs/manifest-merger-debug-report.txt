@@ -15,6 +15,9 @@ ADDED from AndroidManifest.xml:17:1
 		INJECTED from AndroidManifest.xml:0:0
 uses-sdk
 ADDED from AndroidManifest.xml:22:3
+MERGED from com.android.support:cardview-v7:22.1.1:20:5
+MERGED from com.android.support:recyclerview-v7:22.1.1:20:5
+MERGED from com.android.support:support-v4:22.1.1:20:5
 	android:targetSdkVersion
 		ADDED from AndroidManifest.xml:22:39
 		INJECTED from AndroidManifest.xml:0:0
@@ -29,6 +32,9 @@ ADDED from AndroidManifest.xml:24:3
 		ADDED from AndroidManifest.xml:24:20
 application
 ADDED from AndroidManifest.xml:26:3
+MERGED from com.android.support:cardview-v7:22.1.1:22:5
+MERGED from com.android.support:recyclerview-v7:22.1.1:22:5
+MERGED from com.android.support:support-v4:22.1.1:22:5
 	android:label
 		ADDED from AndroidManifest.xml:26:16
 activity#com.examples.youtubeapidemo.YouTubeAPIDemoActivity
@@ -143,3 +149,9 @@ ADDED from AndroidManifest.xml:109:5
 		ADDED from AndroidManifest.xml:110:9
 	android:name
 		ADDED from AndroidManifest.xml:111:9
+activity#android.support.v7.widget.TestActivity
+ADDED from com.android.support:recyclerview-v7:22.1.1:23:9
+	android:label
+		ADDED from com.android.support:recyclerview-v7:22.1.1:25:13
+	android:name
+		ADDED from com.android.support:recyclerview-v7:22.1.1:24:13

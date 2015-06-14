@@ -144,6 +144,9 @@
                 android:name="@string/isLaunchableActivity"
                 android:value="true" />
         </activity>
+        <activity
+            android:name="android.support.v7.widget.TestActivity"
+            android:label="RecyclerViewTestActivity" />
     </application>
 
 </manifest>
