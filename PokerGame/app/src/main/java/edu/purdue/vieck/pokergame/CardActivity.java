@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+
+import com.larvalabs.svgandroid.SVG;
+import com.larvalabs.svgandroid.SVGParser;
 
 
 public class CardActivity extends Activity {
@@ -12,6 +16,10 @@ public class CardActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card);
+        ImageView imageView = (ImageView) findViewById(R.id.aperature);
+        imageView.se
+        SVG aperatureSVG = SVGParser.getSVGFromResource(getResources(),R.drawable.aperturescience);
+        imageView.setImageDrawable(aperatureSVG.createPictureDrawable());
     }
 
     @Override
