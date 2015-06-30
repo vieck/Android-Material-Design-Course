@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="24dp">
+
+    <TextView
+        android:id="@+id/save_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:gravity="center_horizontal"
+        android:text="@string/saved_colors_title"
+        android:textSize="16pt" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/saved_color_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/save_title"
+        android:scrollbars="vertical" />
+
+    <ImageView
+        android:id="@+id/delete_all"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginRight="25dp"
+        android:src="@android:drawable/ic_menu_delete" />
+</RelativeLayout>

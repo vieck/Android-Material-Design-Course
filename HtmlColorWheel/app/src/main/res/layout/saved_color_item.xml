@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:color_cardview="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/saved_color_cardview"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_margin="10dp"
+    color_cardview:cardBackgroundColor="@color/silver"
+    color_cardview:cardCornerRadius="4dp"
+    color_cardview:cardElevation="5dp">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/saved_color"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="5dp" />
+
+        <TextView
+            android:id="@+id/saved_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@id/saved_color"
+            android:gravity="center_vertical"
+            android:textSize="14pt" />
+
+        <ImageView
+            android:id="@+id/trashcan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@android:drawable/ic_menu_delete" />
+
+        <TextView
+            android:id="@+id/saved_hex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/trashcan"
+            android:gravity="center_vertical"
+            android:textSize="12pt" />
+
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

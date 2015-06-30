@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="24dp">
+
+    <TextView
+        android:id="@+id/label_red"
+        style="@style/red_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="12dp"
+        android:text="@string/red" />
+
+    <SeekBar
+        android:id="@+id/seekBar_red"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/label_red"
+        android:layout_toEndOf="@id/label_red"
+        android:max="255"
+        android:progress="255"
+        android:secondaryProgressTint="@color/silver" />
+
+    <TextView
+        android:id="@+id/label_blue"
+        style="@style/blue_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/label_red"
+        android:text="@string/blue" />
+
+    <SeekBar
+        android:id="@+id/seekBar_blue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/label_blue"
+        android:layout_toRightOf="@id/label_blue"
+        android:max="255"
+        android:progress="255" />
+
+    <TextView
+        android:id="@+id/label_green"
+        style="@style/green_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/label_blue"
+        android:text="@string/green" />
+
+    <SeekBar
+        android:id="@+id/seekBar_green"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/label_green"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/label_green"
+        android:max="255"
+        android:progress="255" />
+
+    <TextView
+        android:id="@+id/label_alpha"
+        style="@style/alpha_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/label_green"
+        android:text="@string/alpha" />
+
+    <SeekBar
+        android:id="@+id/seekBar_alpha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/label_alpha"
+        android:layout_toRightOf="@id/label_alpha"
+        android:max="255"
+        android:progress="255" />
+
+    <TextView
+        android:id="@+id/label_hex"
+        style="@style/hex_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/label_alpha"
+        android:layout_marginEnd="24dp"
+        android:gravity="center_horizontal"
+        android:text="@string/hex" />
+
+    <EditText
+        android:id="@+id/edittext_hex"
+        style="@style/hex_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/label_hex"
+        android:layout_marginLeft="24dp"
+        android:layout_toEndOf="@id/label_hex"
+        android:text="#ffffff" />
+
+    <TextView
+        android:id="@+id/textview_color"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/label_hex"
+        android:background="@color/white" />
+
+    <EditText
+        android:id="@+id/edittext_name"
+        style="@style/name_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_color"
+        android:hint="@string/name_hint"
+        android:textColorHint="@color/white" />
+
+    <Button
+        android:id="@+id/save_button"
+        style="@style/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/edittext_name"
+        android:layout_marginLeft="24dp"
+        android:layout_toEndOf="@id/edittext_name"
+        android:text="@string/save_button_text" />
+
+</RelativeLayout>

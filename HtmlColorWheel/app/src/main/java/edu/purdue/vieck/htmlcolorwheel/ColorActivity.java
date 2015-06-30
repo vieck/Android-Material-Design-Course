@@ -1,122 +1,51 @@
 package edu.purdue.vieck.htmlcolorwheel;
 
-import android.app.Activity;
-import android.graphics.Color;
-import android.os.AsyncTask;
+import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.SeekBar;
-import android.widget.TextView;
-
-import static android.graphics.Color.argb;
 
 
-public class ColorActivity extends Activity {
+public class ColorActivity extends AppCompatActivity {
 
-    EditText hexValue;
-    Color color;
-    TextView colorValue;
-    SeekThread thread;
-    SeekBar rSeekBar;
-    SeekBar bSeekBar;
-    SeekBar gSeekBar;
-    SeekBar aSeekBar;
-    String hex = "";
-    int converted = 0;
-    int[] rgba = new int[4];
-
+    private static Context mContext;
+    private static FragmentManager fragmentManager;
+    final private String[] fragments = {"edu.purdue.vieck.SliderFragment", "edu.purdue.vieck.SaveFragment"};
+    private Toolbar toolbar;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private DrawerLayout mDrawerLayout;
+    private RecyclerView mDrawerList;
+    private DrawerAdapter mDrawerAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color);
-        hexValue = (EditText) findViewById(R.id.edittext_hex);
-        colorValue = (TextView) findViewById(R.id.textview_color);
-        rSeekBar = (SeekBar) findViewById(R.id.seekBar_red);
-        bSeekBar = (SeekBar) findViewById(R.id.seekBar_blue);
-        gSeekBar = (SeekBar) findViewById(R.id.seekBar_green);
-        aSeekBar = (SeekBar) findViewById(R.id.seekBar_alpha);
-        color = new Color();
+        mContext = this;
+        fragmentManager = this.getFragmentManager();
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
-        thread = new SeekThread();
-
-        rSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                rgba[1] = progress;
-                thread = new SeekThread();
-                thread.execute();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        bSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                rgba[3] = progress;
-                thread = new SeekThread();
-                thread.execute();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        gSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                rgba[2] = progress;
-                thread = new SeekThread();
-                thread.execute();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
-
-        aSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                rgba[0] = progress;
-                thread = new SeekThread();
-                thread.execute();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name, R.string.app_name);
+        mDrawerLayout.setDrawerListener(actionBarDrawerToggle);
+        mDrawerList = (RecyclerView) findViewById(R.id.left_drawer);
+        mLayoutManager = new LinearLayoutManager(this);
+        mDrawerList.setLayoutManager(mLayoutManager);
+        mDrawerAdapter = new DrawerAdapter(this, getFragmentManager(), mDrawerLayout, getResources().getStringArray(R.array.recycle_view_items));
+        mDrawerList.setAdapter(mDrawerAdapter);
+        getFragmentManager().beginTransaction().add(R.id.fragment_container, new SliderFragment(), "Slider_Fragment").commit();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -138,26 +67,6 @@ public class ColorActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public class SeekThread extends AsyncTask<Void, Integer, String> {
-        @Override
-        protected String doInBackground(Void... params) {
-            converted = argb(rgba[0],rgba[1],rgba[2],rgba[3]);
-            hex = String.format("#%06X", (0xFFFFFF & converted));
-            publishProgress(converted);
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            colorValue.setBackgroundColor(values[0]);
-            hexValue.setText(hex);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-        }
     }
 
 }

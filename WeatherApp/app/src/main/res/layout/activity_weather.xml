@@ -34,26 +34,19 @@
 
         <ImageView
             android:id="@+id/condIcon"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_alignTop="@id/temp"
             android:layout_toRightOf="@id/temp"
             android:src="@mipmap/ic_launcher" />
-
-        <TextView
-            android:id="@+id/tempUnit"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/condIcon"/>
 
         <TextView
             android:id="@+id/descrWeather"
             style="@style/valData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/tempUnit"
-            android:layout_alignStart="@id/tempUnit"
+            android:layout_alignLeft="@id/condIcon"
+            android:layout_alignStart="@id/condIcon"
             android:layout_below="@id/condIcon"
             android:layout_toRightOf="@id/temp" />
     </RelativeLayout>

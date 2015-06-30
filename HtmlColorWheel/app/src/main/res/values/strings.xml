@@ -12,4 +12,15 @@
     <string name="save">Save Color</string>
     <string name="search">Search</string>
     <string name="action_settings">Settings</string>
+
+    <string name="name_hint">Enter a name</string>
+    <string name="save_button_text">Save</string>
+
+    <!--- Saved Colors Strings -->
+    <string name="saved_colors_title">Saved Colors</string>
+
+    <string-array name="recycle_view_items">
+        <item>"Slider"</item>
+        <item>"Saved Colors"</item>
+    </string-array>
 </resources>
