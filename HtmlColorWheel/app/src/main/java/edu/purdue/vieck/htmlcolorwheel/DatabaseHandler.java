@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 /**
- * Created by vieck on 6/28/15.
+ * This handler is our SQLiteDatabase and it enables us to permanently save
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
 

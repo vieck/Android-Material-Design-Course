@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- The toolbar replaces the old support action bar -->
     <include layout="@layout/toolbar" />
 
     <android.support.v4.widget.DrawerLayout xmlns:tools="http://schemas.android.com/tools"
@@ -18,11 +19,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="24dp" />
 
+        <!-- The RecyclerView replaces the now outdated ListView -->
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/left_drawer"
             android:layout_width="240dp"
             android:layout_height="match_parent"
-            android:layout_gravity="start|left"
+            android:layout_gravity="start"
             android:background="#bfc7c9"
             android:choiceMode="singleChoice"
             android:divider="@color/silver"

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:color_cardview="http://schemas.android.com/apk/res-auto"
     android:id="@+id/saved_color_cardview"
@@ -9,6 +10,7 @@
     color_cardview:cardCornerRadius="4dp"
     color_cardview:cardElevation="5dp">
 
+    <!-- Used for our elements in the recyclerview -->
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent">

@@ -104,6 +104,8 @@
         android:layout_below="@id/label_hex"
         android:background="@color/white" />
 
+    <!-- Widgets for the save name and button -->
+
     <EditText
         android:id="@+id/edittext_name"
         style="@style/name_edittext"

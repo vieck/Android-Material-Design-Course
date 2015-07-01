@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="24dp">
 
+    <!-- Title for the save fragment -->
     <TextView
         android:id="@+id/save_title"
         android:layout_width="match_parent"
@@ -20,8 +21,9 @@
         android:layout_below="@id/save_title"
         android:scrollbars="vertical" />
 
+    <!-- Delete all button (The Big Trashcan) -->
     <ImageView
-        android:id="@+id/delete_all"
+        android:id="@+id/delete_all_trashcan"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"

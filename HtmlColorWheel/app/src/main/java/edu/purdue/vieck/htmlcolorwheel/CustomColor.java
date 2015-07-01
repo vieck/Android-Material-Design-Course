@@ -1,7 +1,7 @@
 package edu.purdue.vieck.htmlcolorwheel;
 
 /**
- * Created by vieck on 6/28/15.
+ * Class for holding our color for the saved color recyclerview
  */
 public class CustomColor {
 
@@ -9,8 +9,7 @@ public class CustomColor {
     private String hexValue;
     private long ID;
 
-    public CustomColor() {
-    }
+    public CustomColor() {}
 
 
     public CustomColor(String name, String hexValue, long ID) {

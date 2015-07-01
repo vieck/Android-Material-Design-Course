@@ -22,7 +22,7 @@ public class SaveFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.saved_colors_fragment, container, false);
-        deleteAll = (ImageView) view.findViewById(R.id.delete_all);
+        deleteAll = (ImageView) view.findViewById(R.id.delete_all_trashcan);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.saved_color_list);
         mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
