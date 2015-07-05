@@ -10,7 +10,28 @@
 
     <include layout="@layout/toolbar"/>
 
-    <com.android4devs.slidingtab.SlidingTabLayout
+    <TextView android:id="@+id/news_title"
+        android:text="@string/news_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <android.support.v4.widget.SwipeRefreshLayout android:id="@+id/news_swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/news_title">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/news_recycler_view"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:scrollbars="vertical" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <!--edu.purdue.vieck.topgamesrssfeed.SlidingTabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +42,7 @@
         android:id="@+id/pager"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1" /-->
 
 
 </RelativeLayout>

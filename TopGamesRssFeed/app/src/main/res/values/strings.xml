@@ -2,6 +2,7 @@
     <string name="app_name">Top News</string>
 
     <string name="rss_title">RSS Feed</string>
+
     <string name="news_title">News Feed</string>
     <string name="android_title">Android Feed</string>
     <string name="gaming_title">Gaming Feed</string>
