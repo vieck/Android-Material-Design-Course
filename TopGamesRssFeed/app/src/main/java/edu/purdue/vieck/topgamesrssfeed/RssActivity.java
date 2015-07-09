@@ -2,6 +2,7 @@ package edu.purdue.vieck.topgamesrssfeed;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -30,6 +31,10 @@ public class RssActivity extends AppCompatActivity {
     private RecycleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Toolbar toolbar;
+    private SlidingTabLayout tabLayout;
+    private ViewPager viewPager;
+    private TabViewAdapter tabViewAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +43,16 @@ public class RssActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        /*tabViewAdapter = new TabViewAdapter(getSupportFragmentManager(), getResources().getStringArray(R.array.navigation_drawer_values),3);
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager.setAdapter(tabViewAdapter);
+        tabLayout = (SlidingTabLayout) findViewById(R.id.tabs);
+        tabLayout.setDistributeEvenly(true);
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        tabLayout.setViewPager(viewPager);**/
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.news_swipe_refresh_layout);
+        mRecyclerView = (RecyclerView) findViewById(R.id.news_recycler_view);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
