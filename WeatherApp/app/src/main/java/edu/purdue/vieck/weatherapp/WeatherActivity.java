@@ -2,10 +2,8 @@ package edu.purdue.vieck.weatherapp;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.Menu;
@@ -19,10 +17,7 @@ public class WeatherActivity extends Activity {
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     HelperMethods httpRequest;
-    private Handler updateHandler;
-    private int interval = 10000;
     Context context;
-    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +31,6 @@ public class WeatherActivity extends Activity {
             }
         });
         context = this;
-        updateHandler = new Handler();
-        runUIThread();
     }
 
     @Override
@@ -49,12 +42,8 @@ public class WeatherActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -62,7 +51,9 @@ public class WeatherActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    Runnable UIThread = new Runnable() {
+    //Enable these if you want an automatic refresh
+
+    /*Runnable UIThread = new Runnable() {
         @Override
         public void run() {
             new JSONRequestTask().execute();
@@ -72,7 +63,7 @@ public class WeatherActivity extends Activity {
 
     void runUIThread() {
         UIThread.run();
-    }
+    }**/
 
     class JSONRequestTask extends AsyncTask<Void, Void, Boolean> {
         @Override
