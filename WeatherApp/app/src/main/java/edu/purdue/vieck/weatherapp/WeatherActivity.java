@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +15,8 @@ import org.json.JSONException;
 
 
 public class WeatherActivity extends Activity {
+
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     HelperMethods httpRequest;
     private Handler updateHandler;
@@ -25,6 +28,13 @@ public class WeatherActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new JSONRequestTask().execute();
+            }
+        });
         context = this;
         updateHandler = new Handler();
         runUIThread();
