@@ -24,8 +24,4 @@
         <item>Celsius</item>
     </string-array>
 
-    <string-array name="unitValues">
-        <item>1</item>
-        <item>2</item>
-    </string-array>
 </resources>
