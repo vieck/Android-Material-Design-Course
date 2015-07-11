@@ -34,18 +34,10 @@
             android:layout_below="@id/cityText"
             android:layout_centerHorizontal="true">
 
-            <TextView
-                android:id="@+id/temp"
-                style="@style/tempStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
             <ImageView
                 android:id="@+id/condIcon"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_alignTop="@id/temp"
-                android:layout_toRightOf="@id/temp"
                 android:src="@mipmap/ic_launcher" />
 
             <TextView
@@ -55,8 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/condIcon"
                 android:layout_alignStart="@id/condIcon"
-                android:layout_below="@id/condIcon"
-                android:layout_toRightOf="@id/temp" />
+                android:layout_below="@id/condIcon" />
         </RelativeLayout>
 
         <!-- Temperature data -->
