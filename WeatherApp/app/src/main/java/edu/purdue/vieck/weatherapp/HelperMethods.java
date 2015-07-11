@@ -30,7 +30,7 @@ public class HelperMethods {
     String url;
     String country, description, main, name, icon;
     int id, sunrise, sunset, visibility;
-    double speed, degree, humidity, latitude, longitude, temperature, pressure, min_temp, max_temp;
+    double speed, humidity, latitude, longitude, temperature, pressure, min_temp, max_temp;
 
     /* Views **/
     TextView txtCity, txtTemp, txtDescription, txtMinTemp, txtMaxTemp, txtWindSpeed,
@@ -48,7 +48,6 @@ public class HelperMethods {
         txtMaxTemp = (TextView) rootView.findViewById(R.id.tempMax);
         txtDescription = (TextView) rootView.findViewById(R.id.descrWeather);
         txtWindSpeed = (TextView) rootView.findViewById(R.id.windSpeed);
-        txtWindDegree = (TextView) rootView.findViewById(R.id.windDeg);
         txtHumidity = (TextView) rootView.findViewById(R.id.hum);
         txtPressure = (TextView) rootView.findViewById(R.id.pressure);
         txtVisibility = (TextView) rootView.findViewById(R.id.visibility);
@@ -107,7 +106,6 @@ public class HelperMethods {
 
             JSONObject wind = json.getJSONObject("wind");
             speed = wind.getDouble("speed");
-            degree = wind.getDouble("deg");
 
             visibility = json.getJSONObject("clouds").getInt("all");
 
@@ -166,8 +164,7 @@ public class HelperMethods {
         txtDescription.setText(description);
         txtMinTemp.setText(min_temp + "℉");
         txtMaxTemp.setText(max_temp + "℉");
-        txtWindSpeed.setText(speed + "");
-        txtWindDegree.setText(degree + "");
+        txtWindSpeed.setText(speed + " mph");
         txtHumidity.setText(humidity + "%");
         txtPressure.setText(pressure + "° HPA");
         txtVisibility.setText(visibility+"%");

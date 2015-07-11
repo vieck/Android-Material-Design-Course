@@ -108,15 +108,6 @@
             android:layout_marginTop="12dp"
             android:layout_toRightOf="@id/windIcon" />
 
-        <TextView
-            android:id="@+id/windDeg"
-            style="@style/valData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/windSpeed"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/windSpeed" />
-
         <!-- Humidity -->
         <ImageView
             android:id="@+id/humidityIcon"

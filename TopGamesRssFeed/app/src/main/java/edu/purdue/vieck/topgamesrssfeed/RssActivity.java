@@ -2,16 +2,19 @@ package edu.purdue.vieck.topgamesrssfeed;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -20,6 +23,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.purdue.vieck.topgamesrssfeed.RssDataParser.Item;
 
@@ -31,10 +35,8 @@ public class RssActivity extends AppCompatActivity {
     private RecycleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Toolbar toolbar;
-    private SlidingTabLayout tabLayout;
     private ViewPager viewPager;
-    private TabViewAdapter tabViewAdapter;
-
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,47 @@ public class RssActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        viewPager = (ViewPager) findViewById(R.id.toolbar_viewpager);
+        setupViewPager(viewPager);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.toolbar_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+                viewPager.setCurrentItem(tab.getPosition());
+
+                switch (tab.getPosition()) {
+                    case 0:
+                        showToast("One");
+                        break;
+                    case 1:
+                        showToast("Two");
+
+                        break;
+                    case 2:
+                        showToast("Three");
+
+                        break;
+                }
+            }
+        });
+    }
+
+
         /*tabViewAdapter = new TabViewAdapter(getSupportFragmentManager(), getResources().getStringArray(R.array.navigation_drawer_values),3);
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(tabViewAdapter);
@@ -51,28 +94,16 @@ public class RssActivity extends AppCompatActivity {
 
         tabLayout.setViewPager(viewPager);**/
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.news_swipe_refresh_layout);
-        mRecyclerView = (RecyclerView) findViewById(R.id.news_recycler_view);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mAdapter.clear();
-                new GetRssFeedTask().execute();
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        });
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        ArrayList<Item> arrayList = new ArrayList<>();
-        // specify an adapter (see also next example)
-        mAdapter = new RecycleAdapter(arrayList);
-        mRecyclerView.setAdapter(mAdapter);
-        new GetRssFeedTask().execute();
+    void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new NewsFragment(), "News");
+        adapter.addFrag(new GamingFragment(), "Games");
+        adapter.addFrag(new AndroidFragment(), "Android");
+        viewPager.setAdapter(adapter);
     }
 
     @Override
@@ -97,35 +128,65 @@ public class RssActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class GetRssFeedTask extends AsyncTask<Void, Void, ArrayList<Item>> {
-        @Override
-        protected ArrayList<Item> doInBackground(Void... params) {
-            try {
-                //http://www.reuters.com/rssFeed/scienceNews
-                return loadXmlFromNetwork("http://www.reuters.com/rssFeed/topNews");
-            } catch (IOException e) {
-                Log.d("Error", "IOException: " + e.getMessage());
-            } catch (XmlPullParserException e) {
-                Log.d("Error", "XmlException " + e.getMessage());
-            }
-            return null;
+    static class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
         }
 
         @Override
-        protected void onPostExecute(ArrayList<Item> items) {
-            if (items != null) {
-                Log.d("ArrayList", "Items:" + items.toString());
-                int itemsLength = items.size();
-                Log.d("Size", itemsLength + "");
-                for (int i = 0; i < itemsLength; i++) {
-                    mAdapter.add(i, items.get(i));
-                }
-                mAdapter.notifyDataSetChanged();
-            } else {
-                Log.e("OnPostExecute", "ArrayList is null");
-            }
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
         }
     }
+
+private class GetRssFeedTask extends AsyncTask<Void, Void, ArrayList<Item>> {
+    @Override
+    protected ArrayList<Item> doInBackground(Void... params) {
+        try {
+            //http://www.reuters.com/rssFeed/scienceNews
+            return loadXmlFromNetwork("http://www.reuters.com/rssFeed/topNews");
+        } catch (IOException e) {
+            Log.d("Error", "IOException: " + e.getMessage());
+        } catch (XmlPullParserException e) {
+            Log.d("Error", "XmlException " + e.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(ArrayList<Item> items) {
+        if (items != null) {
+            Log.d("ArrayList", "Items:" + items.toString());
+            int itemsLength = items.size();
+            Log.d("Size", itemsLength + "");
+            for (int i = 0; i < itemsLength; i++) {
+                mAdapter.add(i, items.get(i));
+            }
+            mAdapter.notifyDataSetChanged();
+        } else {
+            Log.e("OnPostExecute", "ArrayList is null");
+        }
+    }
+
+}
 
     // Uploads XML from stackoverflow.com, parses it, and combines it with
     // HTML markup. Returns HTML string.
