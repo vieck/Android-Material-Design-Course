@@ -36,15 +36,10 @@
 
             <ImageView
                 android:id="@+id/condIcon"
-<<<<<<< HEAD
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-=======
                 android:layout_width="100dp"
                 android:layout_height="100dp"
->>>>>>> origin/master
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
                 android:src="@mipmap/ic_launcher" />
 
             <TextView
@@ -59,14 +54,8 @@
                 style="@style/valData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-<<<<<<< HEAD
                 android:layout_below="@id/temp"
                 android:layout_centerHorizontal="true"/>
-=======
-                android:layout_alignLeft="@id/condIcon"
-                android:layout_alignStart="@id/condIcon"
-                android:layout_below="@id/condIcon" />
->>>>>>> origin/master
         </RelativeLayout>
 
         <!-- Temperature data -->

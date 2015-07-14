@@ -8,7 +8,6 @@
         <ListPreference android:key="temperatureUnit"
             android:title="Choose Temperature Unit"
             android:defaultValue="1"
-            android:entries="@array/unitArray"
-            android:entryValues="@array/unitValues"/>
+            android:entries="@array/unitArray"/>
     </PreferenceCategory>
 </PreferenceScreen>
