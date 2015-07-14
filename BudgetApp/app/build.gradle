@@ -4,6 +4,12 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
+    repositories {
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+
     defaultConfig {
         applicationId "edu.purdue.vieck.budgetapp"
         minSdkVersion 21
@@ -21,4 +27,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:design:22.2.0'
+    compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
 }

@@ -34,29 +34,28 @@
             android:layout_below="@id/cityText"
             android:layout_centerHorizontal="true">
 
+            <ImageView
+                android:id="@+id/condIcon"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_launcher" />
+
             <TextView
                 android:id="@+id/temp"
                 style="@style/tempStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:id="@+id/condIcon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignTop="@id/temp"
-                android:layout_toRightOf="@id/temp"
-                android:src="@mipmap/ic_launcher" />
-
+                android:layout_height="wrap_content"
+                android:layout_below="@id/condIcon"
+                android:layout_centerHorizontal="true"/>
             <TextView
                 android:id="@+id/descrWeather"
                 style="@style/valData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/condIcon"
-                android:layout_alignStart="@id/condIcon"
-                android:layout_below="@id/condIcon"
-                android:layout_toRightOf="@id/temp" />
+                android:layout_below="@id/temp"
+                android:layout_centerHorizontal="true"/>
         </RelativeLayout>
 
         <!-- Temperature data -->
@@ -65,7 +64,6 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_below="@id/temp_layout"
-            android:layout_marginTop="10dp"
             android:src="@drawable/temperature" />
 
         <TextView

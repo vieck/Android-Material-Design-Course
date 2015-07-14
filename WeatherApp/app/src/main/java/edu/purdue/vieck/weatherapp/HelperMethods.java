@@ -43,7 +43,7 @@ public class HelperMethods {
         this.url = url;
         imgCondition = (ImageView) rootView.findViewById(R.id.condIcon);
         txtCity = (TextView) rootView.findViewById(R.id.cityText);
-        txtTemp = (TextView) rootView.findViewById(R.id.descrWeather);
+        txtTemp = (TextView) rootView.findViewById(R.id.temp);
         txtMinTemp = (TextView) rootView.findViewById(R.id.tempMin);
         txtMaxTemp = (TextView) rootView.findViewById(R.id.tempMax);
         txtDescription = (TextView) rootView.findViewById(R.id.descrWeather);
@@ -160,7 +160,7 @@ public class HelperMethods {
             }
         }
         txtCity.setText(name);
-        txtTemp.setText(temperature + "");
+        txtTemp.setText(temperature + "℉");
         txtDescription.setText(description);
         txtMinTemp.setText(min_temp + "℉");
         txtMaxTemp.setText(max_temp + "℉");
