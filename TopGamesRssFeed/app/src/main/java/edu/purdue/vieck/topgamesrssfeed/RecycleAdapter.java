@@ -1,5 +1,8 @@
 package edu.purdue.vieck.topgamesrssfeed;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,11 +17,12 @@ import java.util.ArrayList;
  * Created by vieck on 6/7/15.
  */
 public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder> {
-
+    Context mContext;
     private ArrayList<RssDataParser.Item> mDataset;
 
-    public RecycleAdapter(ArrayList<RssDataParser.Item> mDataset) {
-        this.mDataset = mDataset;
+    public RecycleAdapter(Context context, ArrayList<RssDataParser.Item> dataset) {
+        this.mContext = context;
+        this.mDataset = dataset;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -63,6 +67,10 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 Toast.makeText(holder.cardView.getContext(), position+"", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(item.link));
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(i);
             }
         });
         holder.rssTitle.setText(item.title);

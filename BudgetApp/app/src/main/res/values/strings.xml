@@ -4,6 +4,16 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="data_input">Enter In A Value And Fill In The Table</string>
+    <string name="category">Category</string>
+
+
+    <string-array name="categoryarray">
+        <item>Food/Groceries</item>
+        <item>Utilities</item>
+        <item>Entertainment</item>
+        <item>Medical</item>
+        <item>Entertainment</item>
+        <item>Income</item>
+    </string-array>
 </resources>

@@ -1,5 +1,7 @@
 package edu.purdue.vieck.topgamesrssfeed;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -29,6 +31,13 @@ public class GamingFragment extends Fragment {
     RecyclerView mRecyclerView;
     LinearLayoutManager mLayoutManager;
     RecycleAdapter mRecycleAdapter;
+    Context mContext;
+
+    @Override
+    public void onAttach(Activity activity) {
+        mContext = activity.getApplicationContext();
+        super.onAttach(activity);
+    }
 
     @Nullable
     @Override
@@ -38,7 +47,7 @@ public class GamingFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.android_recycler_view);
         mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecycleAdapter = new RecycleAdapter(new ArrayList<RssDataParser.Item>());
+        mRecycleAdapter = new RecycleAdapter(mContext, new ArrayList<RssDataParser.Item>());
         mRecyclerView.setAdapter(mRecycleAdapter);
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -57,7 +66,7 @@ public class GamingFragment extends Fragment {
         protected ArrayList<RssDataParser.Item> doInBackground(Void... params) {
             try {
                 //http://www.reuters.com/rssFeed/scienceNews
-                return loadXmlFromNetwork("http://www.reuters.com/rssFeed/topNews");
+                return loadXmlFromNetwork("http://www.gamespot.com/feeds/new-games/");
             } catch (IOException e) {
                 Log.d("Error", "IOException: " + e.getMessage());
             } catch (XmlPullParserException e) {

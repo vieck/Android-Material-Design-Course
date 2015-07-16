@@ -33,11 +33,29 @@ public class BudgetActivity extends AppCompatActivity{
         mViewPager = (ViewPager) findViewById(R.id.toolbar_viewpager);
         setupViewPager(mViewPager);
         mTabLayout = (TabLayout) findViewById(R.id.toolbar_tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mViewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        //adapter.addFragment(new ChartFragment(this), "Graph");
+        adapter.addFragment(new ChartFragment(), "Graph");
+        adapter.addFragment(new DataFragment(), "Data");
         //adapter.addFrag(new GamingFragment(), "Games");
         //adapter.addFrag(new AndroidFragment(), "Android");
         viewPager.setAdapter(adapter);

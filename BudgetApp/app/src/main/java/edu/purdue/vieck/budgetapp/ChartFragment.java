@@ -1,5 +1,6 @@
 package edu.purdue.vieck.budgetapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -32,8 +33,10 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
     private Typeface mTypeface;
     private Context mContext;
 
-    public ChartFragment(Context mContext) {
-        this.mContext = mContext;
+    @Override
+    public void onAttach(Activity activity) {
+        mContext = activity.getApplicationContext();
+        super.onAttach(activity);
     }
 
     @Override

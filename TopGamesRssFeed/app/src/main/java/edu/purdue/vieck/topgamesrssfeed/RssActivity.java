@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +19,7 @@ public class RssActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private ViewPager viewPager;
+    ViewPagerAdapter adapter;
     private TabLayout tabLayout;
 
     @Override
@@ -30,6 +31,7 @@ public class RssActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         viewPager = (ViewPager) findViewById(R.id.toolbar_viewpager);
+        viewPager.setOffscreenPageLimit(3);
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.toolbar_tabs);
@@ -37,7 +39,9 @@ public class RssActivity extends AppCompatActivity {
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                if (adapter.getItem(tab.getPosition()) != null) {
 
+                }
             }
 
             @Override
@@ -68,10 +72,10 @@ public class RssActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new NewsFragment(), "News");
         adapter.addFragment(new GamingFragment(), "Games");
-        adapter.addFragment(new AndroidFragment(), "Android");
+        adapter.addFragment(new ScienceFragment(), "Android");
         viewPager.setAdapter(adapter);
     }
 
@@ -97,7 +101,7 @@ public class RssActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    static class ViewPagerAdapter extends FragmentPagerAdapter {
+    static class ViewPagerAdapter extends FragmentStatePagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
