@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/LimeGreen</item>
+        <item name="android:colorPrimaryDark">@color/MediumSeaGreen</item>
+        <item name="android:textColorPrimary">@color/Yellow</item>
+        <item name="android:textColorSecondary">@color/DarkOrange</item>
+    </style>
+
+    <style name="MyAppBarLayout" parent="AppTheme">
+        <item name="android:background">@color/ForestGreen</item>
+    </style>
+</resources>
