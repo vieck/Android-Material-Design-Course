@@ -6,6 +6,16 @@
 
     <string name="data_input">Enter In A Value And Fill In The Table</string>
     <string name="category">Category</string>
+    <string name="amount">Amount</string>
+    <string name="expense">expense</string>
+    <string name="expenses">Expenses</string>
+    <string name="income">income</string>
+    <string name="budget">Budget</string>
+    <string name="note">Note</string>
+
+    <string name="day">Day</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
 
 
     <string-array name="categoryarray">

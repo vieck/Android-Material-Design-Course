@@ -1,7 +1,6 @@
 package edu.purdue.vieck.budgetapp;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.github.mikephil.charting.charts.PieChart;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class BudgetActivity extends AppCompatActivity{
 
     private Toolbar mToolbar;
     private ViewPager mViewPager;
-    private TabLayout mTabLayout;
+    private PagerSlidingTabStrip mTabLayout;
     private PieChart mPieChart;
 
     @Override
@@ -32,30 +32,23 @@ public class BudgetActivity extends AppCompatActivity{
         setSupportActionBar(mToolbar);
         mViewPager = (ViewPager) findViewById(R.id.toolbar_viewpager);
         setupViewPager(mViewPager);
-        mTabLayout = (TabLayout) findViewById(R.id.toolbar_tabs);
-        mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        mTabLayout = (PagerSlidingTabStrip) findViewById(R.id.toolbar_tabs);
+        mTabLayout.setViewPager(mViewPager);
+        mTabLayout.setOnTabReselectedListener(new PagerSlidingTabStrip.OnTabReselectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                mViewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
+            public void onTabReselected(int i) {
+                mViewPager.setCurrentItem(i);
             }
         });
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ChartFragment(), "Graph");
-        adapter.addFragment(new DataFragment(), "Data");
+        String[] list = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+        //adapter.addFragment(new ChartFragment(), "Graph");
+        //adapter.addFragment(new DataFragment(), "Data");
+        for (int i = 0; i < list.length; i++)
+            adapter.addFragment(new ChartFragment(),list[i]);
         //adapter.addFrag(new GamingFragment(), "Games");
         //adapter.addFrag(new AndroidFragment(), "Android");
         viewPager.setAdapter(adapter);

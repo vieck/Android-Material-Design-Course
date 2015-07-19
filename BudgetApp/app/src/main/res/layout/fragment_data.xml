@@ -3,25 +3,127 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <TextView android:id="@+id/label_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="12dp"
+        style="@style/textview_label"
         android:text="@string/data_input"/>
 
-    <TextView android:id="@+id/labelCategory"
+    <TextView android:id="@+id/label_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_margin="12dp"
+        android:layout_below="@id/label_input"
+        style="@style/textview_label"
         android:text="@string/category"/>
 
     <Spinner android:id="@+id/spinner_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/labelCategory"
-        android:layout_toEndOf="@+id/labelCategory"/>
+        android:layout_alignBaseline="@id/label_category"
+        android:layout_toEndOf="@+id/label_category"/>
+
+    <TextView android:id="@+id/label_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/label_category"
+        style="@style/textview_label"
+        android:text="@string/amount"/>
+
+    <EditText android:id="@+id/edittext_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:layout_alignBaseline="@id/label_amount"
+        android:layout_toEndOf="@id/label_amount"
+        android:inputType="numberDecimal"
+        android:hint="Enter an amount"/>
+
+    <ToggleButton android:id="@+id/income_or_expense_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/edittext_amount"
+        android:layout_toEndOf="@id/edittext_amount"
+        android:textOff="@string/expense"
+        android:textOn="@string/income"/>
+
+    <TextView android:id="@+id/label_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/label_amount"
+        style="@style/textview_label"
+        android:text="@string/month"/>
+
+    <EditText android:id="@+id/edittext_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:layout_alignBaseline="@id/label_month"
+        android:layout_toEndOf="@id/label_month"
+        android:editable="false"/>
+
+    <TextView android:id="@+id/label_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/textview_label"
+        android:layout_alignBaseline="@id/edittext_month"
+        android:layout_toEndOf="@id/edittext_month"
+        android:text="@string/day"/>
+
+    <EditText android:id="@+id/edittext_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:layout_alignBaseline="@id/label_day"
+        android:layout_toEndOf="@id/label_day"
+        android:maxLength="2"
+        android:editable="false"/>
+
+    <TextView android:id="@+id/label_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/textview_label"
+        android:layout_alignBaseline="@id/edittext_day"
+        android:layout_toEndOf="@id/edittext_day"
+        android:text="@string/year"/>
+
+    <EditText android:id="@+id/eddittext_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:layout_alignBaseline="@id/label_year"
+        android:layout_toEndOf="@id/label_year"
+        android:editable="false"
+        android:maxLength="4"/>
+
+    <TextView android:id="@+id/label_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/label_month"
+        style="@style/textview_label"
+        android:text="@string/note"/>
+
+    <EditText android:id="@+id/eddittext_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/label_note"
+        android:layout_toEndOf="@id/label_note"
+        android:layout_margin="12dp"/>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:adjustViewBounds="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="12dp"
+        android:src="@drawable/ic_add_item"/>
+
+    <android.support.v7.widget.RecyclerView android:id="@+id/budget_recycler_view"
+        android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:layout_below="@id/label_amount" android:scrollbars="none"/>
 
 </RelativeLayout>
