@@ -1,14 +1,13 @@
 package edu.purdue.vieck.animationsondisplay;
 
-import android.graphics.drawable.Animatable;
-import android.graphics.drawable.Drawable;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -26,11 +25,13 @@ public class GalleryActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Animation Gallery");
         setSupportActionBar(toolbar);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        getFragmentManager().beginTransaction().add(R.id.fragment_container, new AnimationFragment(), "Animation_Fragment").commit();
 
-        aperatureView = (ImageView) findViewById(R.id.aperature);
-        clockView = (ImageView) findViewById(R.id.clock);
-        stop_button = (Button) findViewById(R.id.stop_animation);
-        aperatureView.setOnClickListener(new View.OnClickListener() {
+        /*aperatureView = (ImageView) findViewById(R.id.aperature);
+        clockView = (ImageView) findViewById(R.id.clock);**/
+        //stop_button = (Button) findViewById(R.id.stop_animation);
+        /*aperatureView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Drawable vector = aperatureView.getDrawable();
@@ -38,7 +39,7 @@ public class GalleryActivity extends AppCompatActivity {
                     ((Animatable) vector).start();
                 }
             }
-        });
+        });*/
 /*        clockView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +49,7 @@ public class GalleryActivity extends AppCompatActivity {
                 }
             }
         });*/
-        stop_button.setOnClickListener(new View.OnClickListener() {
+        /*stop_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Drawable vector;
@@ -60,7 +61,7 @@ public class GalleryActivity extends AppCompatActivity {
                     ((Animatable) vector).stop();
                 }
             }
-        });
+        });*/
     }
 
     @Override
@@ -76,7 +77,16 @@ public class GalleryActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        switch (id) {
+            case R.id.aperature_nav_item:
+                FragmentTransaction tx = getFragmentManager().beginTransaction();
+                tx.replace(R.id.fragment_container, Fragment.instantiate(this, AnimationFragment.class.getName()));
+                tx.commit();
+                break;
+            case R.id.clock_nav_item:
 
+                break;
+        }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;

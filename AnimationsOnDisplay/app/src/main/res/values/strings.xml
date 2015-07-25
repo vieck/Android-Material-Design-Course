@@ -3,6 +3,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="aperature">Aperature Animation</string>
+    <string name="clock">Clock</string>
     <string name="path_circle">
     M 50,50
     m -48,0

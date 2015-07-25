@@ -30,9 +30,9 @@ public class BudgetActivity extends AppCompatActivity{
         setContentView(R.layout.activity_budget);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        mViewPager = (ViewPager) findViewById(R.id.toolbar_viewpager);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(mViewPager);
-        mTabLayout = (PagerSlidingTabStrip) findViewById(R.id.toolbar_tabs);
+        mTabLayout = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         mTabLayout.setViewPager(mViewPager);
         mTabLayout.setOnTabReselectedListener(new PagerSlidingTabStrip.OnTabReselectedListener() {
             @Override
@@ -45,12 +45,9 @@ public class BudgetActivity extends AppCompatActivity{
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         String[] list = {"January","February","March","April","May","June","July","August","September","October","November","December"};
-        //adapter.addFragment(new ChartFragment(), "Graph");
-        //adapter.addFragment(new DataFragment(), "Data");
+        adapter.addFragment(new ChartFragment(), "Chart");
         for (int i = 0; i < list.length; i++)
-            adapter.addFragment(new ChartFragment(),list[i]);
-        //adapter.addFrag(new GamingFragment(), "Games");
-        //adapter.addFrag(new AndroidFragment(), "Android");
+            adapter.addFragment(new ContainerFragment(),list[i]);
         viewPager.setAdapter(adapter);
     }
 

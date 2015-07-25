@@ -3,10 +3,17 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView android:id="@+id/label_input"
+    <Button android:id="@+id/databtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/switch_chart"/>
+
+    <TextView android:id="@+id/label_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/databtn"
         android:layout_centerHorizontal="true"
         style="@style/textview_label"
         android:text="@string/data_input"/>
@@ -125,5 +132,6 @@
     <android.support.v7.widget.RecyclerView android:id="@+id/budget_recycler_view"
         android:layout_height="wrap_content" android:layout_width="wrap_content"
         android:layout_below="@id/label_amount" android:scrollbars="none"/>
+
 
 </RelativeLayout>

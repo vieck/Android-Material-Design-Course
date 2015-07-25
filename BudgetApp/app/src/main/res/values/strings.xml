@@ -17,6 +17,9 @@
     <string name="month">Month</string>
     <string name="year">Year</string>
 
+    <string name="switch_chart">Switch To Chart</string>
+    <string name="switch_data">Switch to Data</string>
+
 
     <string-array name="categoryarray">
         <item>Food/Groceries</item>

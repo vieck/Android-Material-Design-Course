@@ -3,15 +3,16 @@ package edu.purdue.vieck.budgetapp;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -30,11 +31,11 @@ import java.util.ArrayList;
 
 public class ChartFragment extends Fragment implements OnChartValueSelectedListener {
     private PieChart mPieChart;
-    private Typeface mTypeface;
+    private Button chartButton;
     private Context mContext;
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(final Activity activity) {
         mContext = activity.getApplicationContext();
         super.onAttach(activity);
     }
@@ -48,6 +49,17 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
+
+        chartButton = (Button) view.findViewById(R.id.chartbtn);
+        chartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.container,new DataFragment());
+                ft.commit();
+            }
+        });
+
         mPieChart = (PieChart) view.findViewById(R.id.pie_chart);
         mPieChart.setDescription("Budget Wheel");
         mPieChart.setUsePercentValues(true);
