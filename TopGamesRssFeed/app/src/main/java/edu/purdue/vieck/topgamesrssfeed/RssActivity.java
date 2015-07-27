@@ -75,7 +75,7 @@ public class RssActivity extends AppCompatActivity {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new NewsFragment(), "News");
         adapter.addFragment(new GamingFragment(), "Games");
-        adapter.addFragment(new ScienceFragment(), "Android");
+        adapter.addFragment(new ScienceFragment(), "Science");
         viewPager.setAdapter(adapter);
     }
 
