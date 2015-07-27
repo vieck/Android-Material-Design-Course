@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -87,6 +88,7 @@ public class GamingFragment extends Fragment {
                 mRecycleAdapter.notifyDataSetChanged();
             } else {
                 Log.e("OnPostExecute", "ArrayList is null");
+                Snackbar.make(getView(), "No Connection Was Made", Snackbar.LENGTH_LONG).show();
             }
         }
 
