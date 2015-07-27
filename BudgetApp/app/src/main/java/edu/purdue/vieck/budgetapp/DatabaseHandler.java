@@ -64,7 +64,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         database.close();
     }
 
-    public ArrayList<BudgetElement> getAllColors() {
+    public ArrayList<BudgetElement> getAllData() {
         ArrayList<BudgetElement> mDataset = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_DATA;
 

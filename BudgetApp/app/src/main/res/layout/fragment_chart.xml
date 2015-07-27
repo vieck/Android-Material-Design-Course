@@ -1,14 +1,21 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="edu.purdue.vieck.budgetapp.ChartFragment">
-    <Button android:id="@+id/chartbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/switch_data"/>
+    android:layout_height="match_parent" android:orientation="vertical"
+    android:fillViewport="true"
+    tools:context="edu.purdue.vieck.budgetapp.ChartFragment">
 
+    <FrameLayout android:id="@+id/frame_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
         <com.github.mikephil.charting.charts.PieChart android:id="@+id/pie_chart"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            />
-</FrameLayout>
+            android:layout_width="wrap_content" />
+    </FrameLayout>
+
+    <android.support.v7.widget.RecyclerView android:id="@+id/budget_recycler_view"
+        android:layout_below="@id/frame_layout"
+        android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:scrollbars="vertical"/>
+</RelativeLayout>

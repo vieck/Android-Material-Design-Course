@@ -9,7 +9,11 @@ public class BudgetElement {
     private int day, month, year;
     private float amount;
 
-    public BudgetElement(){
+    public BudgetElement() {
+
+    }
+
+    public BudgetElement(float amount, String category, boolean type, int day, int month, int year, String note){
 
     }
 

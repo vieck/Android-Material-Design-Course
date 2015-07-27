@@ -6,7 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -31,6 +32,8 @@ import java.util.ArrayList;
 
 public class ChartFragment extends Fragment implements OnChartValueSelectedListener {
     private PieChart mPieChart;
+    private RecyclerView mRecyclerView;
+    private RecyclerAdapter mRecyclerAdapter;
     private Button chartButton;
     private Context mContext;
 
@@ -50,15 +53,10 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
 
-        chartButton = (Button) view.findViewById(R.id.chartbtn);
-        chartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.container,new DataFragment());
-                ft.commit();
-            }
-        });
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.budget_recycler_view);
+        mRecyclerAdapter = new RecyclerAdapter(mContext);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecyclerView.setAdapter(mRecyclerAdapter);
 
         mPieChart = (PieChart) view.findViewById(R.id.pie_chart);
         mPieChart.setDescription("Budget Wheel");
@@ -68,7 +66,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         mPieChart.setDrawHoleEnabled(true);
         mPieChart.setHoleColor(Color.GREEN);
         mPieChart.setTransparentCircleColor(Color.WHITE);
-        mPieChart.setHoleRadius(58f);
+        mPieChart.setHoleRadius(40f);
         mPieChart.setTransparentCircleRadius(45f);
         mPieChart.setDrawCenterText(true);
 
@@ -83,6 +81,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         mPieChart.setOnChartValueSelectedListener(this);
 
         mPieChart.setCenterText("MPAndroidChart\nby Philipp Jahoda");
+        mPieChart.setCenterTextSize(9.5f);
 
         setData(3, 100);
 
@@ -92,8 +91,9 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         Legend l = mPieChart.getLegend();
         l.setPosition(LegendPosition.RIGHT_OF_CHART);
         l.setXEntrySpace(7f);
-        l.setYEntrySpace(0f);
+        l.setYEntrySpace(7f);
         l.setYOffset(0f);
+        l.setXOffset(5f);
         return view;
     }
 
@@ -116,7 +116,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
             xVals.add("Test");
 
         PieDataSet dataSet = new PieDataSet(yVals1, "Election Results");
-        dataSet.setSliceSpace(3f);
+        dataSet.setSliceSpace(2f);
         dataSet.setSelectionShift(5f);
 
         // add a lot of colors
@@ -144,8 +144,8 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
 
         PieData data = new PieData(xVals, dataSet);
         data.setValueFormatter(new PercentFormatter());
-        data.setValueTextSize(11f);
-        data.setValueTextColor(Color.WHITE);
+        data.setValueTextSize(12f);
+        data.setValueTextColor(Color.BLACK);
         mPieChart.setData(data);
 
         // undo all highlights

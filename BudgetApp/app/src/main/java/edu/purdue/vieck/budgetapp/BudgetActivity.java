@@ -3,9 +3,11 @@ package edu.purdue.vieck.budgetapp;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,15 +16,18 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.github.mikephil.charting.charts.PieChart;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
-public class BudgetActivity extends AppCompatActivity{
+public class BudgetActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private ViewPager mViewPager;
     private PagerSlidingTabStrip mTabLayout;
     private PieChart mPieChart;
+    private LinearLayoutManager linearLayoutManager;
+    private RecyclerView recyclerView;
+    private RecyclerAdapter recyclerAdapter;
+    ViewPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +48,17 @@ public class BudgetActivity extends AppCompatActivity{
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        String[] list = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        String[] list = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         adapter.addFragment(new ChartFragment(), "Chart");
         for (int i = 0; i < list.length; i++)
-            adapter.addFragment(new ContainerFragment(),list[i]);
+            adapter.addFragment(new SubmitFragment(), list[i]);
         viewPager.setAdapter(adapter);
     }
 
-    static class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
+    static class ViewPagerAdapter extends FragmentStatePagerAdapter {
+        private final ArrayList<Fragment> mFragmentList = new ArrayList<>();
+        private final ArrayList<String> mTitleList = new ArrayList<>();
 
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
@@ -71,12 +76,22 @@ public class BudgetActivity extends AppCompatActivity{
 
         public void addFragment(Fragment fragment, String title) {
             mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
+            mTitleList.add(title);
+        }
+
+        public void replaceFragment(Fragment fragment, String title) {
+            for (int i = 0; i < mTitleList.size(); i++) {
+                if (mTitleList.get(i).equals(title)) {
+                    mFragmentList.set(i, fragment);
+                    notifyDataSetChanged();
+                    return;
+                }
+            }
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
+            return mTitleList.get(position);
         }
     }
 
