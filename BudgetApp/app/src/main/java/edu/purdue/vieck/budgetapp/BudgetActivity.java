@@ -51,8 +51,8 @@ public class BudgetActivity extends AppCompatActivity {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         String[] list = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         adapter.addFragment(new ChartFragment(), "Chart");
-        for (int i = 0; i < list.length; i++)
-            adapter.addFragment(new SubmitFragment(), list[i]);
+        //for (int i = 0; i < list.length; i++)
+            //adapter.addFragment(null, list[i]);
         viewPager.setAdapter(adapter);
     }
 
@@ -110,7 +110,9 @@ public class BudgetActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_data) {
+            SubmitFragment submitFragment = new SubmitFragment();
+            submitFragment.show(getSupportFragmentManager(), "SubmitFragment");
             return true;
         }
 

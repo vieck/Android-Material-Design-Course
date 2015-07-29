@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ import java.util.Calendar;
 /**
  * Created by vieck on 7/13/15.
  */
-public class SubmitFragment extends Fragment {
+public class SubmitFragment extends android.support.v4.app.DialogFragment {
     private Context mContext;
     private Spinner mSpinner;
 

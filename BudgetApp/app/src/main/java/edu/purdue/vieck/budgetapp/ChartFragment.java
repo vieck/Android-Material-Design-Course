@@ -80,7 +80,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         // add a selection listener
         mPieChart.setOnChartValueSelectedListener(this);
 
-        mPieChart.setCenterText("MPAndroidChart\nby Philipp Jahoda");
+        //mPieChart.setCenterText("MPAndroidChart\nby Philipp Jahoda");
         mPieChart.setCenterTextSize(9.5f);
 
         setData(3, 100);
@@ -89,7 +89,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         // mChart.spin(2000, 0, 360);
 
         Legend l = mPieChart.getLegend();
-        l.setPosition(LegendPosition.RIGHT_OF_CHART);
+        l.setPosition(LegendPosition.PIECHART_CENTER);
         l.setXEntrySpace(7f);
         l.setYEntrySpace(7f);
         l.setYOffset(0f);
@@ -116,8 +116,8 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
             xVals.add("Test");
 
         PieDataSet dataSet = new PieDataSet(yVals1, "Election Results");
-        dataSet.setSliceSpace(2f);
-        dataSet.setSelectionShift(5f);
+        dataSet.setSliceSpace(5f);
+        dataSet.setSelectionShift(9f);
 
         // add a lot of colors
 

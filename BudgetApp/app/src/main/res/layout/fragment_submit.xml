@@ -3,17 +3,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button android:id="@+id/databtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/switch_chart"/>
-
     <TextView android:id="@+id/label_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/databtn"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         style="@style/textview_label"
         android:text="@string/data_input"/>
@@ -51,22 +44,21 @@
     <ToggleButton android:id="@+id/income_or_expense_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/edittext_amount"
-        android:layout_toEndOf="@id/edittext_amount"
+        android:layout_below="@id/label_amount"
+        android:layout_centerHorizontal="true"
         android:textOff="@string/expense"
         android:textOn="@string/income"/>
 
     <TextView android:id="@+id/label_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/label_amount"
+        android:layout_below="@id/income_or_expense_button"
         style="@style/textview_label"
         android:text="@string/month"/>
 
     <EditText android:id="@+id/edittext_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
         android:layout_alignBaseline="@id/label_month"
         android:layout_toEndOf="@id/label_month"
         android:editable="false"/>
@@ -82,7 +74,6 @@
     <EditText android:id="@+id/edittext_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
         android:layout_alignBaseline="@id/label_day"
         android:layout_toEndOf="@id/label_day"
         android:maxLength="2"
@@ -99,7 +90,6 @@
     <EditText android:id="@+id/eddittext_year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
         android:layout_alignBaseline="@id/label_year"
         android:layout_toEndOf="@id/label_year"
         android:editable="false"
@@ -117,7 +107,24 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/label_note"
         android:layout_toEndOf="@id/label_note"
-        android:layout_margin="12dp"/>
+        android:layout_marginLeft="12dp"/>
+
+    <NumberPicker android:id="@+id/number_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/label_note"
+        android:layout_centerHorizontal="true"/>
+
+    <NumberPicker android:id="@+id/number_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/label_note"
+        android:layout_alignStart="@id/number_day"/>
+    <NumberPicker android:id="@+id/number_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/label_note"
+        android:layout_toEndOf="@id/number_day"/>
 
     <ImageButton android:id="@+id/imagebtn_submit"
         android:layout_width="50dp"
