@@ -19,7 +19,6 @@ public class SaveAdapter extends RecyclerView.Adapter<SaveAdapter.ViewHolder> {
 
     DatabaseHandler databaseHandler;
     ArrayList<CustomColor> customColors;
-
     public SaveAdapter(Context context) {
         databaseHandler = new DatabaseHandler(context);
         customColors = databaseHandler.getAllColors();

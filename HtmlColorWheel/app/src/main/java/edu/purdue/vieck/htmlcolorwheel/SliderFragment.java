@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -123,9 +124,10 @@ public class SliderFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //
+
                 CustomColor customColor = new CustomColor(nameValue.getText().toString(), hexValue.getText().toString(), UUID.randomUUID().getMostSignificantBits());
                 databaseHandler.addColor(customColor);
+                Snackbar.make(getView(), "Color Was Saved", Snackbar.LENGTH_SHORT).show();
             }
         });
         return view;

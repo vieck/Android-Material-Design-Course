@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/label_hex"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="12dp"
         android:layout_toEndOf="@id/label_hex"
         android:text="#ffffff" />
 
@@ -112,8 +112,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textview_color"
+        android:maxLength="14"
         android:hint="@string/name_hint"
-        android:textColorHint="@color/White" />
+        android:textColorHint="@color/SteelBlue"/>
 
     <Button
         android:id="@+id/save_button"
