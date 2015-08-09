@@ -26,7 +26,7 @@
             android:layout_width="240dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="#bfc7c9"
+            android:background="@color/silver"
             android:choiceMode="singleChoice"
             android:divider="@color/silver"
             android:dividerHeight="0dp" />

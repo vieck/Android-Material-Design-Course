@@ -4,6 +4,6 @@
     android:drawable="@drawable/aperaturescience"
     tools:targetApi="21">
     <target
-        android:animation="@anim/translate80d"
+        android:animation="@anim/translate360d"
         android:name="completeImage"/>
 </animated-vector>

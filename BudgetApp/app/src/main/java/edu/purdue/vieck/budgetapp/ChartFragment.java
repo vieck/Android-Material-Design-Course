@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 
 public class ChartFragment extends Fragment implements OnChartValueSelectedListener {
     private PieChart mPieChart;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private RecyclerAdapter mRecyclerAdapter;
     private Button chartButton;
@@ -52,11 +54,18 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
-
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.budget_recycler_view);
         mRecyclerAdapter = new RecyclerAdapter(mContext);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setAdapter(mRecyclerAdapter);
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mRecyclerAdapter.notifyDataSetChanged();
+            }
+        });
 
         mPieChart = (PieChart) view.findViewById(R.id.pie_chart);
         mPieChart.setDescription("Budget Wheel");

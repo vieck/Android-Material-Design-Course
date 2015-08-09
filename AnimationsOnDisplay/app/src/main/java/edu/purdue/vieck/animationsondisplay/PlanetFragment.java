@@ -1,41 +1,40 @@
 package edu.purdue.vieck.animationsondisplay;
 
-import android.app.Activity;
-import android.app.Fragment;
+
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+
 /**
- * Created by vieck on 6/16/15.
+ * A simple {@link Fragment} subclass.
  */
-public class AnimationFragment extends Fragment {
+public class PlanetFragment extends Fragment {
 
-    private ImageView aperatureView;
-    private boolean isRunning;
+    ImageView planet_view;
+    Boolean isRunning;
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public PlanetFragment() {
+        // Required empty public constructor
     }
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.aperature_animation, container, false);
-
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         isRunning = false;
-
-        aperatureView = (ImageView) v.findViewById(R.id.aperature);
-        aperatureView.setOnClickListener(new View.OnClickListener() {
+        View v = inflater.inflate(R.layout.planet_animation, container, false);
+        // Inflate the layout for this fragment
+        planet_view = (ImageView) v.findViewById(R.id.planet);
+        planet_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Drawable vector = aperatureView.getDrawable();
+                Drawable vector = planet_view.getDrawable();
                 if (vector instanceof Animatable) {
                     if (isRunning) {
                         ((Animatable) vector).stop();
@@ -44,10 +43,11 @@ public class AnimationFragment extends Fragment {
                         ((Animatable) vector).start();
                         isRunning = true;
                     }
-
                 }
             }
         });
         return v;
     }
+
+
 }

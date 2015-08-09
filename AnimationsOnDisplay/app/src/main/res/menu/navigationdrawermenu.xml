@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="all">
+
         <item android:id="@+id/aperature_nav_item"
             android:icon="@drawable/aperaturescience"
-            android:title="@string/aperature"/>
+            android:title="@string/aperature" />
 
         <item android:id="@+id/clock_nav_item"
             android:icon="@drawable/clock"
             android:title="@string/clock"/>
+
+        <item android:id="@+id/planet_nav_item"
+            android:icon="@drawable/bluetooth_loading_vector"
+            android:title="@string/planet"/>
+
+        <item android:id="@+id/radar_nav_item"
+            android:icon="@drawable/radar"
+            android:title="@string/radar"/>
     </group>
 </menu>

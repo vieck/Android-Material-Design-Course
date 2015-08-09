@@ -34,9 +34,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
 
     @Override
     public void onBindViewHolder(mViewHolder viewHolder, int i) {
-        viewHolder.amount.setText("mAmount $");
-        viewHolder.expenses.setText("mExpense");
-        viewHolder.income.setText("mIncome");
+        final BudgetElement budgetElement = mDataset.get(i);
+        viewHolder.amount.setText(budgetElement.getAmount()+"");
+        viewHolder.expenses.setText(budgetElement.isType()+"");
+        viewHolder.income.setText(budgetElement.getCategory());
+        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseHandler.delete(budgetElement);
+            }
+        });
     }
 
     @Override

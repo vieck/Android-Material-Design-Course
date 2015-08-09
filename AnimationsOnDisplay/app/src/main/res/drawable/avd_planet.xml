@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/bluetooth_loading_vector" >
+    <target
+        android:name="circleGroup"
+        android:animation="@anim/planet_circle_expand" />
+    <target
+        android:name="circlePath"
+        android:animation="@anim/planet_circle_path" />
+</animated-vector>

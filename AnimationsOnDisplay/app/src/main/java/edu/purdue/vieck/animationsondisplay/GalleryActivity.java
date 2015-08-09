@@ -1,8 +1,7 @@
 package edu.purdue.vieck.animationsondisplay;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +15,7 @@ public class GalleryActivity extends AppCompatActivity {
     private Button stop_button;
     private Toolbar toolbar;
     DrawerLayout drawerLayout;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,42 +26,27 @@ public class GalleryActivity extends AppCompatActivity {
         toolbar.setTitle("Animation Gallery");
         setSupportActionBar(toolbar);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        getFragmentManager().beginTransaction().add(R.id.fragment_container, new AnimationFragment(), "Animation_Fragment").commit();
-
-        /*aperatureView = (ImageView) findViewById(R.id.aperature);
-        clockView = (ImageView) findViewById(R.id.clock);**/
-        //stop_button = (Button) findViewById(R.id.stop_animation);
-        /*aperatureView.setOnClickListener(new View.OnClickListener() {
+        navigationView = (NavigationView) findViewById(R.id.navigation_layout);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Drawable vector = aperatureView.getDrawable();
-                if (vector instanceof Animatable) {
-                    ((Animatable) vector).start();
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                switch (id) {
+                    case R.id.aperature_nav_item:
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, new AnimationFragment()).commit();
+                        break;
+                    case R.id.clock_nav_item:
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, new ClockFragment()).commit();
+                        break;
+                    case R.id.planet_nav_item:
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,new PlanetFragment()).commit();
+                    case R.id.radar_nav_item:
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, new RadarFragment()).commit();
                 }
+                return true;
             }
-        });*/
-/*        clockView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Drawable clock = clockView.getDrawable();
-                if (clock instanceof Animatable) {
-                    ((Animatable) clock).start();
-                }
-            }
-        });*/
-        /*stop_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Drawable vector;
-                if (aperatureView != null) {
-                    vector = aperatureView.getDrawable();
-                    ((Animatable) vector).stop();
-                } else if (clockView != null) {
-                    vector = clockView.getDrawable();
-                    ((Animatable) vector).stop();
-                }
-            }
-        });*/
+        });
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container, new AnimationFragment(), "Animation_Fragment").commit();
     }
 
     @Override
@@ -77,20 +62,8 @@ public class GalleryActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        switch (id) {
-            case R.id.aperature_nav_item:
-                FragmentTransaction tx = getFragmentManager().beginTransaction();
-                tx.replace(R.id.fragment_container, Fragment.instantiate(this, AnimationFragment.class.getName()));
-                tx.commit();
-                break;
-            case R.id.clock_nav_item:
-
-                break;
-        }
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }

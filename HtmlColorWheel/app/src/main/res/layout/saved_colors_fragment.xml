@@ -12,7 +12,8 @@
         android:layout_marginBottom="12dp"
         android:gravity="center_horizontal"
         android:text="@string/saved_colors_title"
-        android:textSize="16pt" />
+        android:textSize="16pt"
+        android:textStyle="bold"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/saved_color_list"

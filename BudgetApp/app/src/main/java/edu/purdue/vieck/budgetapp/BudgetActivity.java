@@ -6,14 +6,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.github.mikephil.charting.charts.PieChart;
 
 import java.util.ArrayList;
 
@@ -23,10 +20,7 @@ public class BudgetActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private ViewPager mViewPager;
     private PagerSlidingTabStrip mTabLayout;
-    private PieChart mPieChart;
-    private LinearLayoutManager linearLayoutManager;
-    private RecyclerView recyclerView;
-    private RecyclerAdapter recyclerAdapter;
+    private DatabaseHandler mDatabaseHandler;
     ViewPagerAdapter adapter;
 
     @Override
@@ -35,6 +29,7 @@ public class BudgetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_budget);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        mDatabaseHandler = new DatabaseHandler(this);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(mViewPager);
         mTabLayout = (PagerSlidingTabStrip) findViewById(R.id.tabs);
@@ -51,6 +46,7 @@ public class BudgetActivity extends AppCompatActivity {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         String[] list = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         adapter.addFragment(new ChartFragment(), "Chart");
+        ArrayList<BudgetElement> months = mDatabaseHandler.getAllMonths();
         //for (int i = 0; i < list.length; i++)
             //adapter.addFragment(null, list[i]);
         viewPager.setAdapter(adapter);
@@ -113,6 +109,9 @@ public class BudgetActivity extends AppCompatActivity {
         if (id == R.id.action_data) {
             SubmitFragment submitFragment = new SubmitFragment();
             submitFragment.show(getSupportFragmentManager(), "SubmitFragment");
+            return true;
+        } else if (id == R.id.action_delete) {
+            mDatabaseHandler.deleteAll();
             return true;
         }
 

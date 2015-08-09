@@ -37,7 +37,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + COLUMN_TYPE + " INTEGER,"
                 + COLUMN_DAY + " INTEGER,"
                 + COLUMN_MONTH + " INTEGER,"
-                + COLUMN_YEAR + " INTEGER"
+                + COLUMN_YEAR + " INTEGER,"
                 + COLUMN_NOTE + " TEXT" + ");";
         db.execSQL(CREATE_COLOR_TABLE);
     }
@@ -68,9 +68,35 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ArrayList<BudgetElement> mDataset = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_DATA;
 
-        SQLiteDatabase database = this.getWritableDatabase();
+        SQLiteDatabase database = this.getReadableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
 
+        if (cursor.moveToFirst()) {
+            do {
+                BudgetElement budgetElement = new BudgetElement();
+                cursor.getLong(0);
+                budgetElement.setCategory(cursor.getString(1));
+                budgetElement.setAmount(cursor.getFloat(2));
+                if (cursor.getInt(3) == 0) {
+                    budgetElement.setType(false);
+                } else {
+                    budgetElement.setType(true);
+                }
+                budgetElement.setDay(cursor.getInt(4));
+                budgetElement.setMonth(cursor.getInt(5));
+                budgetElement.setYear(cursor.getInt(6));
+
+                mDataset.add(budgetElement);
+            } while (cursor.moveToNext());
+        }
+        return mDataset;
+    }
+
+    public ArrayList<BudgetElement> getAllMonths() {
+        ArrayList<BudgetElement> mDataset = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABLE_DATA + " GROUP BY " + COLUMN_MONTH;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery,null);
         if (cursor.moveToFirst()) {
             do {
                 BudgetElement budgetElement = new BudgetElement();
