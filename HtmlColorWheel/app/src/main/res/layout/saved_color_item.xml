@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:layout_margin="10dp"
-    color_cardview:cardBackgroundColor="@color/silver"
+    color_cardview:cardBackgroundColor="@color/Silver"
     color_cardview:cardCornerRadius="4dp"
     color_cardview:cardElevation="5dp">
 
@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/saved_color"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_marginEnd="5dp" />
