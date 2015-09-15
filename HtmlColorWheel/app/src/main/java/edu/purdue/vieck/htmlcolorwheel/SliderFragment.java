@@ -15,6 +15,9 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.flask.colorpicker.ColorPickerView;
+import com.flask.colorpicker.slider.AlphaSlider;
+
 import java.util.UUID;
 
 import static android.graphics.Color.argb;
@@ -27,7 +30,9 @@ public class SliderFragment extends Fragment {
     Color color;
     TextView colorValue;
     SeekThread thread;
-    SeekBar rSeekBar, bSeekBar, gSeekBar, aSeekBar;
+    ColorPickerView colorPickerView;
+    AlphaSlider alphaSlider;
+    //SeekBar rSeekBar, bSeekBar, gSeekBar, aSeekBar;
     String hex = "";
     Button saveButton;
     int converted = 0;
@@ -37,17 +42,21 @@ public class SliderFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.slider_fragment, container, false);
-        hexValue = (EditText) view.findViewById(R.id.edittext_hex);
+        /**hexValue = (EditText) view.findViewById(R.id.edittext_hex);
         colorValue = (TextView) view.findViewById(R.id.textview_color);
         rSeekBar = (SeekBar) view.findViewById(R.id.seekBar_red);
         bSeekBar = (SeekBar) view.findViewById(R.id.seekBar_blue);
         gSeekBar = (SeekBar) view.findViewById(R.id.seekBar_green);
-        aSeekBar = (SeekBar) view.findViewById(R.id.seekBar_alpha);
+        aSeekBar = (SeekBar) view.findViewById(R.id.seekBar_alpha);**/
+        colorPickerView = (ColorPickerView) view.findViewById(R.id.colorview);
+        alphaSlider = (AlphaSlider) view.findViewById(R.id.alphaslider);
         nameValue = (EditText) view.findViewById(R.id.edittext_name);
         saveButton = (Button) view.findViewById(R.id.save_button);
 
         databaseHandler = new DatabaseHandler(getActivity().getApplicationContext());
-        rSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+
+        /**rSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 rgba[1] = progress;
@@ -119,7 +128,7 @@ public class SliderFragment extends Fragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
 
             }
-        });
+        });**/
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="24dp">
 
-    <TextView
+    <com.flask.colorpicker.ColorPickerView
+        android:id="@+id/colorview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:alphaSlider="true"
+        app:wheelType="CIRCLE"
+        />
+
+    <com.flask.colorpicker.slider.AlphaSlider
+        android:id="@+id/alphaslider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/colorview"/>
+
+    <!--TextView
         android:id="@+id/label_red"
         style="@style/red_label"
         android:layout_width="wrap_content"
@@ -102,7 +117,7 @@
         android:layout_width="180dp"
         android:layout_height="30dp"
         android:layout_below="@id/label_hex"
-        android:background="@color/White" />
+        android:background="@color/White" /-->
 
     <!-- Widgets for the save name and button -->
 
@@ -111,7 +126,7 @@
         style="@style/name_edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_color"
+        android:layout_below="@id/alphaslider"
         android:maxLength="14"
         android:hint="@string/name_hint"
         android:textColorHint="@color/SteelBlue"/>
