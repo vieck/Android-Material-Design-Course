@@ -11,113 +11,13 @@
         android:layout_height="wrap_content"
         app:alphaSlider="true"
         app:wheelType="CIRCLE"
-        />
+        app:alphaSliderView="@+id/alphaslider"/>
 
     <com.flask.colorpicker.slider.AlphaSlider
         android:id="@+id/alphaslider"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="28dp"
         android:layout_below="@id/colorview"/>
-
-    <!--TextView
-        android:id="@+id/label_red"
-        style="@style/red_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="12dp"
-        android:text="@string/red" />
-
-    <SeekBar
-        android:id="@+id/seekBar_red"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/label_red"
-        android:layout_toEndOf="@id/label_red"
-        android:max="255"
-        android:progress="255"
-        android:secondaryProgressTint="@color/SteelBlue" />
-
-    <TextView
-        android:id="@+id/label_blue"
-        style="@style/blue_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/label_red"
-        android:text="@string/blue" />
-
-    <SeekBar
-        android:id="@+id/seekBar_blue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/label_blue"
-        android:layout_toRightOf="@id/label_blue"
-        android:max="255"
-        android:progress="255" />
-
-    <TextView
-        android:id="@+id/label_green"
-        style="@style/green_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/label_blue"
-        android:text="@string/green" />
-
-    <SeekBar
-        android:id="@+id/seekBar_green"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/label_green"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/label_green"
-        android:max="255"
-        android:progress="255" />
-
-    <TextView
-        android:id="@+id/label_alpha"
-        style="@style/alpha_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/label_green"
-        android:text="@string/alpha" />
-
-    <SeekBar
-        android:id="@+id/seekBar_alpha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/label_alpha"
-        android:layout_toRightOf="@id/label_alpha"
-        android:max="255"
-        android:progress="255" />
-
-    <TextView
-        android:id="@+id/label_hex"
-        style="@style/hex_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/label_alpha"
-        android:layout_marginEnd="24dp"
-        android:gravity="center_horizontal"
-        android:text="@string/hex" />
-
-    <EditText
-        android:id="@+id/edittext_hex"
-        style="@style/hex_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/label_hex"
-        android:layout_marginLeft="12dp"
-        android:layout_toEndOf="@id/label_hex"
-        android:text="#ffffff" />
-
-    <TextView
-        android:id="@+id/textview_color"
-        android:layout_width="180dp"
-        android:layout_height="30dp"
-        android:layout_below="@id/label_hex"
-        android:background="@color/White" /-->
 
     <!-- Widgets for the save name and button -->
 
