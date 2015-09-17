@@ -3,6 +3,10 @@ package edu.purdue.vieck.htmlcolorwheel;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ColorActivity extends AppCompatActivity {
 
@@ -19,11 +26,9 @@ public class ColorActivity extends AppCompatActivity {
     private static FragmentManager fragmentManager;
     final private String[] fragments = {"edu.purdue.vieck.SliderFragment", "edu.purdue.vieck.SaveFragment"};
     private Toolbar toolbar;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
-    private DrawerLayout mDrawerLayout;
-    private RecyclerView mDrawerList;
-    private DrawerAdapter mDrawerAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private ViewPager viewPager;
+    ViewPagerAdapter adapter;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -32,19 +37,31 @@ public class ColorActivity extends AppCompatActivity {
         mContext = this;
         fragmentManager = this.getFragmentManager();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
 
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name, R.string.app_name);
-        mDrawerLayout.setDrawerListener(actionBarDrawerToggle);
-        mDrawerList = (RecyclerView) findViewById(R.id.left_drawer);
-        mLayoutManager = new LinearLayoutManager(this);
-        mDrawerList.setLayoutManager(mLayoutManager);
-        mDrawerAdapter = new DrawerAdapter(this, getFragmentManager(), mDrawerLayout, getResources().getStringArray(R.array.recycle_view_items));
-        mDrawerList.setAdapter(mDrawerAdapter);
-        getFragmentManager().beginTransaction().add(R.id.fragment_container, new SliderFragment(), "Slider_Fragment").commit();
+        viewPager = (ViewPager) findViewById(R.id.toolbar_viewpager);
+        viewPager.setOffscreenPageLimit(2);
+        setupViewPager(viewPager);
+
+        tabLayout = (TabLayout) findViewById(R.id.toolbar_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
     }
 
     @Override
@@ -69,4 +86,39 @@ public class ColorActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void setupViewPager(ViewPager viewPager) {
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new SliderFragment(), "Selector");
+        adapter.addFragment(new SaveFragment(), "Colors");
+        viewPager.setAdapter(adapter);
+    }
+
+    static class ViewPagerAdapter extends FragmentStatePagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(android.support.v4.app.FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
 }

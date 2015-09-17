@@ -21,24 +21,14 @@
 
     <!-- Widgets for the save name and button -->
 
-    <EditText
-        android:id="@+id/edittext_name"
-        style="@style/name_edittext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/alphaslider"
-        android:maxLength="14"
-        android:hint="@string/name_hint"
-        android:textColorHint="@color/SteelBlue"/>
-
     <Button
         android:id="@+id/save_button"
         style="@style/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/edittext_name"
+        android:layout_below="@id/alphaslider"
         android:layout_marginLeft="24dp"
-        android:layout_toEndOf="@id/edittext_name"
+        android:layout_centerHorizontal="true"
         android:text="@string/save_button_text" />
 
 </RelativeLayout>

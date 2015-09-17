@@ -1,12 +1,14 @@
 package edu.purdue.vieck.htmlcolorwheel;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +37,6 @@ public class SliderFragment extends Fragment {
     SeekThread thread;
     ColorPickerView colorPickerView;
     AlphaSlider alphaSlider;
-    //SeekBar rSeekBar, bSeekBar, gSeekBar, aSeekBar;
     String hex = "";
     Button saveButton;
     int converted = 0;
@@ -47,27 +48,54 @@ public class SliderFragment extends Fragment {
         final View view = inflater.inflate(R.layout.slider_fragment, container, false);
         colorPickerView = (ColorPickerView) view.findViewById(R.id.colorview);
         alphaSlider = (AlphaSlider) view.findViewById(R.id.alphaslider);
-        nameValue = (EditText) view.findViewById(R.id.edittext_name);
         saveButton = (Button) view.findViewById(R.id.save_button);
-
+        mContext = getActivity();
         databaseHandler = new DatabaseHandler(getActivity().getApplicationContext());
 
         colorPickerView.addOnColorSelectedListener(new OnColorSelectedListener() {
             @Override
             public void onColorSelected(int i) {
                 Log.d("Debug",String.format("#%06X", (0xFFFFFF & i)));
-                Toast.makeText(mContext,"#"+i,Toast.LENGTH_LONG).show();
-
             }
         });
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
+      saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                CustomColor customColor = new CustomColor(nameValue.getText().toString(),String.format("#%06X", (0xFFFFFF & colorPickerView.getSelectedColor())) , UUID.randomUUID().getMostSignificantBits());
-                databaseHandler.addColor(customColor);
-                Snackbar.make(getView(), "Color Was Saved", Snackbar.LENGTH_SHORT).show();
+                LayoutInflater li = LayoutInflater.from(mContext);
+                View alertView = li.inflate(R.layout.alert_text, null);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+                alertDialogBuilder.setView(alertView);
+                nameValue = (EditText) alertView.findViewById(R.id.edittext_name);
+
+                // set dialog message
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        // get user input and set it to result
+                                        CustomColor customColor = new CustomColor(nameValue.getText().toString(),String.format("#%06X", (0xFFFFFF & colorPickerView.getSelectedColor())) , UUID.randomUUID().getMostSignificantBits());
+                                        databaseHandler.addColor(customColor);
+                                        Snackbar.make(getView(), "Color Was Saved", Snackbar.LENGTH_SHORT).show();
+                                    }
+                                })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
+
+
             }
         });
         return view;

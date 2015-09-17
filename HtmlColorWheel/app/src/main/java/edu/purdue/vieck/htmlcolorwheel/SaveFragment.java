@@ -2,11 +2,12 @@ package edu.purdue.vieck.htmlcolorwheel;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,7 +21,6 @@ import android.widget.ImageView;
 public class SaveFragment extends Fragment {
 
     Context mContext;
-
     RecyclerView recyclerView;
     LinearLayoutManager mLayoutManager;
     SaveAdapter mSaveAdapter;
@@ -29,7 +29,6 @@ public class SaveFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.saved_colors_fragment, container, false);
         deleteAll = (ImageView) view.findViewById(R.id.delete_all_trashcan);
-
         recyclerView = (RecyclerView) view.findViewById(R.id.saved_color_list);
         mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
