@@ -77,9 +77,16 @@ public class SubmitFragment extends android.support.v4.app.DialogFragment {
                     showSnackBar("Invalid Amount");
                     return;
                 }
+                Float amountV = Float.parseFloat(amount.getText().toString());
+                String spinnerV = mSpinner.getSelectedItem().toString();
+                Boolean toggleV = toggleButton.isChecked();
+                int day = datePicker.getDayOfMonth();
+                int month = datePicker.getMonth();
+                int year = datePicker.getYear();
+                String entry = note.getText().toString();
                 BudgetElement budgetElement = new BudgetElement(
-                        Float.parseFloat(amount.getText().toString()), mSpinner.getSelectedItem().toString(), toggleButton.isChecked(),
-                        datePicker.getDayOfMonth(),datePicker.getMonth(), datePicker.getYear(),note.getText().toString());
+                        amountV, spinnerV, toggleV,
+                        day,month, year,entry);
                 databaseHandler.addData(budgetElement);
                 showSnackBar("Added Data");
             }

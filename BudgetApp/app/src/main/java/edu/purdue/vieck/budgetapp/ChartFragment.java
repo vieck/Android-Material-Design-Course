@@ -63,7 +63,9 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mRecyclerAdapter.notifyDataSetChanged();
+                mRecyclerAdapter = new RecyclerAdapter(mContext);
+                mRecyclerView.setAdapter(mRecyclerAdapter);
+                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
 

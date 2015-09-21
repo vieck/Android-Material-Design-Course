@@ -14,7 +14,13 @@ public class BudgetElement {
     }
 
     public BudgetElement(float amount, String category, boolean type, int day, int month, int year, String note){
-
+        this.amount = amount;
+        this.category = category;
+        this.type = type;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.note = note;
     }
 
     public float getAmount() {

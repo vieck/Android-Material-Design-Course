@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Created by vieck on 7/16/15.
@@ -17,7 +18,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
 
     Context context;
     DatabaseHandler databaseHandler;
-    ArrayList<BudgetElement> mDataset = new ArrayList<>();
+    Stack<BudgetElement> mDataset = new Stack<>();
 
     public RecyclerAdapter(Context context) {
         this.context = context;
@@ -34,7 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
 
     @Override
     public void onBindViewHolder(mViewHolder viewHolder, int i) {
-        final BudgetElement budgetElement = mDataset.get(i);
+        final BudgetElement budgetElement = mDataset.get(0);
         viewHolder.amount.setText(budgetElement.getAmount()+"");
         viewHolder.expenses.setText(budgetElement.isType()+"");
         viewHolder.income.setText(budgetElement.getCategory());

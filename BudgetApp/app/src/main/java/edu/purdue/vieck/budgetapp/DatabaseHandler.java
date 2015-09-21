@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Created by vieck on 7/22/15.
@@ -64,14 +66,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         database.close();
     }
 
-    public ArrayList<BudgetElement> getAllData() {
-        ArrayList<BudgetElement> mDataset = new ArrayList<>();
+    public Stack<BudgetElement> getAllData() {
+        Stack<BudgetElement> mDataset = new Stack<>();
         String selectQuery = "SELECT  * FROM " + TABLE_DATA;
 
         SQLiteDatabase database = this.getReadableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()) {
+        Cursor test = database.rawQuery("SELECT  * FROM " + TABLE_DATA,null);
+        Log.d("Database",test.getCount()+"");
+        cursor.moveToFirst();
+        if (!cursor.isAfterLast()) {
             do {
                 BudgetElement budgetElement = new BudgetElement();
                 cursor.getLong(0);
@@ -85,7 +89,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 budgetElement.setDay(cursor.getInt(4));
                 budgetElement.setMonth(cursor.getInt(5));
                 budgetElement.setYear(cursor.getInt(6));
-
+                Log.d("Database","Category" + budgetElement.getCategory() +
+                "\nAmount "+ budgetElement.getAmount() +
+                "\nType "+budgetElement.isType());
                 mDataset.add(budgetElement);
             } while (cursor.moveToNext());
         }
