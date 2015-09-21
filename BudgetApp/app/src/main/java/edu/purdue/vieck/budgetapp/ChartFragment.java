@@ -37,6 +37,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
     private RecyclerView mRecyclerView;
     private RecyclerAdapter mRecyclerAdapter;
     private Button chartButton;
+    DatabaseHandler mDatabaseHandler;
     private Context mContext;
 
     @Override
@@ -69,8 +70,10 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
             }
         });
 
+        mDatabaseHandler = new DatabaseHandler(mContext);
+
         mPieChart = (PieChart) view.findViewById(R.id.pie_chart);
-        mPieChart.setDescription("Budget Wheel");
+        //mPieChart.setDescription("Budget Wheel");
         mPieChart.setUsePercentValues(true);
         mPieChart.setDragDecelerationFrictionCoef(0.95f);
         //mTypeface = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
@@ -117,16 +120,23 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         // IMPORTANT: In a PieChart, no values (Entry) should have the same
         // xIndex (even if from different DataSets), since no values can be
         // drawn above each other.
-        for (int i = 0; i < count + 1; i++) {
+        /*for (int i = 0; i < count + 1; i++) {
             yVals1.add(new Entry((float) (Math.random() * mult) + mult / 5, i));
-        }
+        }*/
+        ArrayList<BudgetElement> groceries = mDatabaseHandler.getAllGroceries();
+        ArrayList<BudgetElement> medical = mDatabaseHandler.getAllGroceries();
+        ArrayList<BudgetElement> entertainment = mDatabaseHandler.getAllGroceries();
+        ArrayList<BudgetElement> utilities = mDatabaseHandler.getAllGroceries();
 
         ArrayList<String> xVals = new ArrayList<String>();
 
-        for (int i = 0; i < count + 1; i++)
-            xVals.add("Test");
+        xVals.add("Food/Groceries");
+        xVals.add("Utilities");
+        xVals.add("Entertainment");
+        xVals.add("Medical");
+        xVals.add("Income");
 
-        PieDataSet dataSet = new PieDataSet(yVals1, "Election Results");
+        PieDataSet dataSet = new PieDataSet(yVals1, "Budget");
         dataSet.setSliceSpace(5f);
         dataSet.setSelectionShift(9f);
 
