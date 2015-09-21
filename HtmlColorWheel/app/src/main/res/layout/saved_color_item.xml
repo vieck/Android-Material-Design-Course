@@ -5,7 +5,7 @@
     android:id="@+id/saved_color_cardview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_margin="7dp"
     color_cardview:cardBackgroundColor="@color/Silver"
     color_cardview:cardCornerRadius="4dp"
     color_cardview:cardElevation="5dp">

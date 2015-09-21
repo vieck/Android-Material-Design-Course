@@ -29,6 +29,8 @@ public class ColorActivity extends AppCompatActivity {
     private ViewPager viewPager;
     ViewPagerAdapter adapter;
     private TabLayout tabLayout;
+    SaveFragment saveFragment;
+    SliderFragment sliderFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -48,6 +50,9 @@ public class ColorActivity extends AppCompatActivity {
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 1) {
+                    saveFragment.refreshColors();
+                }
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
@@ -88,8 +93,10 @@ public class ColorActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new SliderFragment(), "Selector");
-        adapter.addFragment(new SaveFragment(), "Colors");
+        sliderFragment = new SliderFragment();
+        saveFragment = new SaveFragment();
+        adapter.addFragment(sliderFragment, "Selector");
+        adapter.addFragment(saveFragment, "Colors");
         viewPager.setAdapter(adapter);
     }
 

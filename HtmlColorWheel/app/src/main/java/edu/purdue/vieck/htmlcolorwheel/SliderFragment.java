@@ -5,6 +5,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.graphics.SweepGradient;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -17,45 +20,55 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.flask.colorpicker.ColorPickerView;
-import com.flask.colorpicker.OnColorSelectedListener;
-import com.flask.colorpicker.slider.AlphaSlider;
+import com.larswerkman.holocolorpicker.ColorPicker;
+import com.larswerkman.holocolorpicker.OpacityBar;
 
 import java.util.UUID;
 
 import static android.graphics.Color.argb;
 
 /**
- * Created by vieck on 6/25/15.
+ * Author: Michael Vieck
+ * Date: 9/20/2015
+
+ * ColorPicker License
+ * https://github.com/LarsWerkman/HoloColorPicker
+ * Copyright 2012 Lars Werkman
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
  */
 public class SliderFragment extends Fragment {
     EditText nameValue;
     Color color;
-    TextView colorValue;
-    SeekThread thread;
-    ColorPickerView colorPickerView;
-    AlphaSlider alphaSlider;
-    String hex = "";
+    ColorPicker colorPicker;
+    OpacityBar opacityBar;
     Button saveButton;
-    int converted = 0;
-    int[] rgba = new int[4];
     Context mContext;
     DatabaseHandler databaseHandler;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.slider_fragment, container, false);
-        colorPickerView = (ColorPickerView) view.findViewById(R.id.colorview);
-        alphaSlider = (AlphaSlider) view.findViewById(R.id.alphaslider);
+        colorPicker = (ColorPicker) view.findViewById(R.id.color_view);
+        opacityBar = (OpacityBar) view.findViewById(R.id.opacity_bar);
         saveButton = (Button) view.findViewById(R.id.save_button);
         mContext = getActivity();
         databaseHandler = new DatabaseHandler(getActivity().getApplicationContext());
-
-        colorPickerView.addOnColorSelectedListener(new OnColorSelectedListener() {
+        colorPicker.addOpacityBar(opacityBar);
+        colorPicker.setOnColorChangedListener(new ColorPicker.OnColorChangedListener() {
             @Override
-            public void onColorSelected(int i) {
-                Log.d("Debug",String.format("#%06X", (0xFFFFFF & i)));
+            public void onColorChanged(int color) {
+                Log.d("Debug", String.format("#%06X", (0xFFFFFF & color)));
             }
         });
 
@@ -77,7 +90,7 @@ public class SliderFragment extends Fragment {
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
                                         // get user input and set it to result
-                                        CustomColor customColor = new CustomColor(nameValue.getText().toString(),String.format("#%06X", (0xFFFFFF & colorPickerView.getSelectedColor())) , UUID.randomUUID().getMostSignificantBits());
+                                        CustomColor customColor = new CustomColor(nameValue.getText().toString(),String.format("#%06X", (0xFFFFFF & colorPicker.getColor())) , UUID.randomUUID().getMostSignificantBits());
                                         databaseHandler.addColor(customColor);
                                         Snackbar.make(getView(), "Color Was Saved", Snackbar.LENGTH_SHORT).show();
                                     }
@@ -105,25 +118,6 @@ public class SliderFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         color = new Color();
-        thread = new SeekThread();
     }
 
-    private class SeekThread extends AsyncTask<Void, Integer, String> {
-        @Override
-        protected String doInBackground(Void... params) {
-            converted = argb(rgba[0], rgba[1], rgba[2], rgba[3]);
-            hex = String.format("#%06X", (0xFFFFFF & converted));
-            publishProgress(converted);
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            colorValue.setBackgroundColor(values[0]);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-        }
-    }
 }

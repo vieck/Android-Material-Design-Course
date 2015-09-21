@@ -21,6 +21,7 @@ import android.widget.ImageView;
 public class SaveFragment extends Fragment {
 
     Context mContext;
+    SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerView;
     LinearLayoutManager mLayoutManager;
     SaveAdapter mSaveAdapter;
@@ -29,11 +30,21 @@ public class SaveFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.saved_colors_fragment, container, false);
         deleteAll = (ImageView) view.findViewById(R.id.delete_all_trashcan);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
         recyclerView = (RecyclerView) view.findViewById(R.id.saved_color_list);
         mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         mSaveAdapter = new SaveAdapter(getActivity().getApplicationContext());
         recyclerView.setAdapter(mSaveAdapter);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSaveAdapter = new SaveAdapter(mContext);
+                recyclerView.setAdapter(mSaveAdapter);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         final DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
             @Override
@@ -61,6 +72,11 @@ public class SaveFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    public void refreshColors() {
+        mSaveAdapter = new SaveAdapter(mContext);
+        recyclerView.setAdapter(mSaveAdapter);
     }
 
     @Override

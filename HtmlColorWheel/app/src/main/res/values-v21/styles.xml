@@ -2,11 +2,11 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:colorPrimary">@color/Peru</item>
+        <item name="android:colorPrimary">@color/Black</item>
         <item name="android:colorPrimaryDark">@color/Black</item>
         <item name="android:windowBackground">@color/Black</item>
-        <item name="android:textColorPrimary">@color/Peru</item>
-        <item name="android:textColorSecondary">@color/Peru</item>
+        <item name="android:textColorPrimary">@color/Black</item>
+        <item name="android:textColorSecondary">@color/Black</item>
     </style>
 
     <style name="ToolbarTheme" parent="AppTheme">
@@ -55,6 +55,7 @@
     <style name="save_button">
         <item name="android:textSize">12pt</item>
         <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/Black</item>
     </style>
 
 </resources>
