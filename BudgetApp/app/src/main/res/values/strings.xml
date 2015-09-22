@@ -23,7 +23,7 @@
 
 
     <string-array name="categoryarray">
-        <item>Food/Groceries</item>
+        <item>Groceries</item>
         <item>Utilities</item>
         <item>Entertainment</item>
         <item>Medical</item>

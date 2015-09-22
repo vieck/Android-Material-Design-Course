@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Stack;
 
 /**
@@ -53,7 +54,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void addData(BudgetElement budgetElement) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        //contentValues.put(COLUMN_ID, color.getID());
         contentValues.put(COLUMN_CATEGORY, budgetElement.getCategory());
         contentValues.put(COLUMN_AMOUNT, budgetElement.getAmount());
         contentValues.put(COLUMN_TYPE, budgetElement.isType());
@@ -98,8 +98,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return mDataset;
     }
 
-    public ArrayList<BudgetElement> getAllMonths() {
-        ArrayList<BudgetElement> mDataset = new ArrayList<>();
+    public HashMap<Integer, BudgetElement> getAllMonths() {
+        HashMap<Integer,BudgetElement> mDataset = new HashMap<>();
         String selectQuery = "SELECT * FROM " + TABLE_DATA + " GROUP BY " + COLUMN_MONTH;
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(selectQuery,null);
@@ -118,16 +118,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 budgetElement.setMonth(cursor.getInt(5));
                 budgetElement.setYear(cursor.getInt(6));
 
-                mDataset.add(budgetElement);
+                mDataset.put(budgetElement.getMonth(), budgetElement);
             } while (cursor.moveToNext());
         }
         return mDataset;
     }
 
-    public ArrayList<BudgetElement> getAllGroceries() {
+    public ArrayList<BudgetElement> getFilteredData(String filter) {
         ArrayList<BudgetElement> mDataset = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + TABLE_DATA + " WHERE " + COLUMN_CATEGORY +
-                " = Food/Groceries";
+        String selectQuery = "SELECT * FROM " + TABLE_DATA + " WHERE category LIKE '%" + filter + "%'";
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(selectQuery,null);
         if (cursor.moveToFirst()) {
@@ -153,7 +152,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void delete(BudgetElement budgetElement) {
         SQLiteDatabase database = this.getWritableDatabase();
-        database.delete(TABLE_DATA, COLUMN_ID + " = " + budgetElement.getCategory(), null);
+        database.delete(TABLE_DATA, COLUMN_ID + " = " + "'"+budgetElement.getCategory()+"'", null);
     }
 
     public void deleteAll() {

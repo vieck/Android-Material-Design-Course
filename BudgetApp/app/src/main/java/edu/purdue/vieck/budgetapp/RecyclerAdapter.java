@@ -35,7 +35,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
 
     @Override
     public void onBindViewHolder(mViewHolder viewHolder, int i) {
-        final BudgetElement budgetElement = mDataset.get(0);
+        final BudgetElement budgetElement = mDataset.get(i);
+        viewHolder.date.setText(budgetElement.getMonth() + "-"+budgetElement.getMonth() + "-" + budgetElement.getYear());
         viewHolder.amount.setText(budgetElement.getAmount()+"");
         viewHolder.expenses.setText(budgetElement.isType()+"");
         viewHolder.income.setText(budgetElement.getCategory());
@@ -54,12 +55,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
 
     public class mViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        TextView amount;
-        TextView expenses;
-        TextView income;
+        TextView date, amount, expenses, income;
         public mViewHolder(View v) {
             super(v);
             cardView = (CardView) v.findViewById(R.id.cardview);
+            date = (TextView) v.findViewById(R.id.cardview_date);
             amount = (TextView) v.findViewById(R.id.cardview_amount);
             expenses = (TextView) v.findViewById(R.id.cardview_expenses);
             income = (TextView) v.findViewById(R.id.cardview_budget);

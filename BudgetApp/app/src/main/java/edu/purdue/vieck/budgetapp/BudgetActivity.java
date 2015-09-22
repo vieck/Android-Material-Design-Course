@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import com.astuetz.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class BudgetActivity extends AppCompatActivity {
@@ -40,14 +41,19 @@ public class BudgetActivity extends AppCompatActivity {
                 mViewPager.setCurrentItem(i);
             }
         });
+
     }
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         String[] list = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         adapter.addFragment(new ChartFragment(), "Chart");
-        ArrayList<BudgetElement> months = mDatabaseHandler.getAllMonths();
-        //for (int i = 0; i < list.length; i++)
+        HashMap<Integer, BudgetElement> months = mDatabaseHandler.getAllMonths();
+        for (Integer i : months.keySet()) {
+            adapter.addFragment(new ChartFragment(),list[i-1] + " " + months.get(i).getYear());
+        }
+
+        for (int i = 0; i < list.length; i++)
             //adapter.addFragment(null, list[i]);
         viewPager.setAdapter(adapter);
     }

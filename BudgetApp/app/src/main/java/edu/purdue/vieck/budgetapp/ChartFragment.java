@@ -39,6 +39,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
     private Button chartButton;
     DatabaseHandler mDatabaseHandler;
     private Context mContext;
+    Integer month;
 
     @Override
     public void onAttach(final Activity activity) {
@@ -66,6 +67,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
             public void onRefresh() {
                 mRecyclerAdapter = new RecyclerAdapter(mContext);
                 mRecyclerView.setAdapter(mRecyclerAdapter);
+                setData(3,100);
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -80,7 +82,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         mPieChart.setDrawHoleEnabled(true);
         mPieChart.setHoleColor(Color.GREEN);
         mPieChart.setTransparentCircleColor(Color.WHITE);
-        mPieChart.setHoleRadius(40f);
+        mPieChart.setHoleRadius(45f);
         mPieChart.setTransparentCircleRadius(45f);
         mPieChart.setDrawCenterText(true);
 
@@ -115,28 +117,60 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
 
         float mult = range;
 
-        ArrayList<Entry> yVals1 = new ArrayList<Entry>();
+        ArrayList<Entry> yVals = new ArrayList<Entry>();
 
         // IMPORTANT: In a PieChart, no values (Entry) should have the same
         // xIndex (even if from different DataSets), since no values can be
         // drawn above each other.
         /*for (int i = 0; i < count + 1; i++) {
-            yVals1.add(new Entry((float) (Math.random() * mult) + mult / 5, i));
+            yVals.add(new Entry((float) (Math.random() * mult) + mult / 5, i));
         }*/
-        ArrayList<BudgetElement> groceries = mDatabaseHandler.getAllGroceries();
-        ArrayList<BudgetElement> medical = mDatabaseHandler.getAllGroceries();
-        ArrayList<BudgetElement> entertainment = mDatabaseHandler.getAllGroceries();
-        ArrayList<BudgetElement> utilities = mDatabaseHandler.getAllGroceries();
+        ArrayList<BudgetElement> groceries = mDatabaseHandler.getFilteredData("Groceries");
+        float groceryCount, medicalCount, entertainmentCount, utilitiesCount, incomeCount;
+        groceryCount = 0;
+        for (BudgetElement element : groceries)
+            groceryCount += element.getAmount();
 
+
+        ArrayList<BudgetElement> medical = mDatabaseHandler.getFilteredData("Medical");
+        medicalCount = 0;
+        for (BudgetElement element : medical)
+            medicalCount += element.getAmount();
+
+
+        ArrayList<BudgetElement> entertainment = mDatabaseHandler.getFilteredData("Entertainment");
+        entertainmentCount = 0;
+        for (BudgetElement element : entertainment)
+            entertainmentCount += element.getAmount();
+
+
+        ArrayList<BudgetElement> utilities = mDatabaseHandler.getFilteredData("Utilities");
+        utilitiesCount = 0;
+        for (BudgetElement element : utilities)
+            utilitiesCount += element.getAmount();
+
+        ArrayList<BudgetElement> income = mDatabaseHandler.getFilteredData("Income");
+        incomeCount = 0;
+        for (BudgetElement element : income)
+            incomeCount += element.getAmount();
+
+        float totalAmount = groceryCount + utilitiesCount + entertainmentCount + medicalCount + incomeCount;
+        int totalCount = groceries.size() + utilities.size() + medical.size() + entertainment.size() + income.size();
+        Log.d("Chart","Total Amount "+totalAmount);
+        Log.d("Chart","Groceries Percentage "+groceryCount/totalAmount);
         ArrayList<String> xVals = new ArrayList<String>();
-
+        yVals.add(new Entry(groceryCount / totalAmount, 0));
+        yVals.add(new Entry( utilitiesCount / totalAmount, 1));
+        yVals.add(new Entry( entertainmentCount / totalAmount, 2));
+        yVals.add(new Entry( medicalCount / totalAmount, 3));
+        yVals.add(new Entry( incomeCount / totalAmount, 4));
         xVals.add("Food/Groceries");
         xVals.add("Utilities");
         xVals.add("Entertainment");
         xVals.add("Medical");
         xVals.add("Income");
 
-        PieDataSet dataSet = new PieDataSet(yVals1, "Budget");
+        PieDataSet dataSet = new PieDataSet(yVals, "Budget");
         dataSet.setSliceSpace(5f);
         dataSet.setSelectionShift(9f);
 
