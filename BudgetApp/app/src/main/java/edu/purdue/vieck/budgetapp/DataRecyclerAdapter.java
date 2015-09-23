@@ -13,17 +13,22 @@ import java.util.Stack;
 /**
  * Created by vieck on 7/16/15.
  */
-public class DataRecyclerAdapter extends RecyclerView.Adapter<DataRecyclerAdapter.mViewHolder>{
+public class DataRecyclerAdapter extends RecyclerView.Adapter<DataRecyclerAdapter.mViewHolder> {
 
     Context context;
     DatabaseHandler databaseHandler;
     Stack<BudgetElement> mDataset = new Stack<>();
 
-    public DataRecyclerAdapter(Context context) {
+    public DataRecyclerAdapter(Context context, String filter) {
         this.context = context;
         databaseHandler = new DatabaseHandler(context);
-        mDataset = databaseHandler.getAllData();
+        if (filter == "") {
+            mDataset = databaseHandler.getAllData();
+        } else {
+            mDataset = databaseHandler.searchDatabase(filter);
+        }
     }
+
 
     @Override
     public mViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -35,9 +40,9 @@ public class DataRecyclerAdapter extends RecyclerView.Adapter<DataRecyclerAdapte
     @Override
     public void onBindViewHolder(mViewHolder viewHolder, int i) {
         final BudgetElement budgetElement = mDataset.get(i);
-        viewHolder.date.setText(budgetElement.getMonth() + "-"+budgetElement.getMonth() + "-" + budgetElement.getYear());
-        viewHolder.amount.setText(budgetElement.getAmount()+"");
-        viewHolder.expenses.setText(budgetElement.isType()+"");
+        viewHolder.date.setText(budgetElement.getMonth() + "-" + budgetElement.getMonth() + "-" + budgetElement.getYear());
+        viewHolder.amount.setText(budgetElement.getAmount() + "");
+        viewHolder.expenses.setText(budgetElement.isType() + "");
         viewHolder.income.setText(budgetElement.getCategory());
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +60,7 @@ public class DataRecyclerAdapter extends RecyclerView.Adapter<DataRecyclerAdapte
     public class mViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
         TextView date, amount, expenses, income;
+
         public mViewHolder(View v) {
             super(v);
             cardView = (CardView) v.findViewById(R.id.data_cardview);

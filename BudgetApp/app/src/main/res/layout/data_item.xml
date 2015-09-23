@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/data_cardview"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="12dp"
-    app:cardCornerRadius="5dp">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/data_cardview_relative_layout"
