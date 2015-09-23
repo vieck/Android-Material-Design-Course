@@ -8,19 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Stack;
 
 /**
  * Created by vieck on 7/16/15.
  */
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewHolder>{
+public class DataRecyclerAdapter extends RecyclerView.Adapter<DataRecyclerAdapter.mViewHolder>{
 
     Context context;
     DatabaseHandler databaseHandler;
     Stack<BudgetElement> mDataset = new Stack<>();
 
-    public RecyclerAdapter(Context context) {
+    public DataRecyclerAdapter(Context context) {
         this.context = context;
         databaseHandler = new DatabaseHandler(context);
         mDataset = databaseHandler.getAllData();
@@ -28,7 +27,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
 
     @Override
     public mViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.budget_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.data_item, viewGroup, false);
         mViewHolder viewHolder = new mViewHolder(view);
         return viewHolder;
     }
@@ -58,11 +57,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
         TextView date, amount, expenses, income;
         public mViewHolder(View v) {
             super(v);
-            cardView = (CardView) v.findViewById(R.id.cardview);
-            date = (TextView) v.findViewById(R.id.cardview_date);
-            amount = (TextView) v.findViewById(R.id.cardview_amount);
-            expenses = (TextView) v.findViewById(R.id.cardview_expenses);
-            income = (TextView) v.findViewById(R.id.cardview_budget);
+            cardView = (CardView) v.findViewById(R.id.data_cardview);
+            date = (TextView) v.findViewById(R.id.data_cardview_date);
+            amount = (TextView) v.findViewById(R.id.data_cardview_amount);
+            expenses = (TextView) v.findViewById(R.id.data_cardview_expenses);
+            income = (TextView) v.findViewById(R.id.data_cardview_budget);
         }
     }
 }

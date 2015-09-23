@@ -35,7 +35,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
     private PieChart mPieChart;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    private RecyclerAdapter mRecyclerAdapter;
+    private ChartRecyclerAdapter mChartRecyclerAdapter;
     private Button chartButton;
     DatabaseHandler mDatabaseHandler;
     private Context mContext;
@@ -58,15 +58,15 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.budget_recycler_view);
-        mRecyclerAdapter = new RecyclerAdapter(mContext);
+        mChartRecyclerAdapter = new ChartRecyclerAdapter(mContext);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        mRecyclerView.setAdapter(mRecyclerAdapter);
+        mRecyclerView.setAdapter(mChartRecyclerAdapter);
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mRecyclerAdapter = new RecyclerAdapter(mContext);
-                mRecyclerView.setAdapter(mRecyclerAdapter);
+                mChartRecyclerAdapter = new ChartRecyclerAdapter(mContext);
+                mRecyclerView.setAdapter(mChartRecyclerAdapter);
                 setData(3,100);
                 mSwipeRefreshLayout.setRefreshing(false);
             }

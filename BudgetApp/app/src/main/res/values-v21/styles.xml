@@ -3,8 +3,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimary">@color/LimeGreen</item>
         <item name="android:colorPrimaryDark">@color/MediumSeaGreen</item>
-        <item name="android:textColorPrimary">@color/DarkOrange</item>
-        <item name="android:textColorSecondary">@color/DarkOrange</item>
+        <item name="android:textColorPrimary">@color/BlueViolet</item>
+        <item name="android:background">@color/White</item>
     </style>
 
     <style name="MyAppBarLayout" parent="AppTheme">

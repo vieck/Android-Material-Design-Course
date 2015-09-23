@@ -5,9 +5,10 @@
     tools:context="edu.purdue.vieck.budgetapp.ChartFragment">
 
     <FrameLayout android:id="@+id/frame_layout"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true">
         <com.github.mikephil.charting.charts.PieChart android:id="@+id/pie_chart"
             android:layout_height="wrap_content"

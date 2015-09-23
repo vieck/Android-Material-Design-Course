@@ -18,6 +18,10 @@
     <string name="month">Month</string>
     <string name="year">Year</string>
 
+    <!-- Nav Menu Strings -->
+    <string name="charts">Charts</string>
+    <string name="data">Data Logs</string>
+    
     <string name="switch_chart">Switch To Chart</string>
     <string name="switch_data">Switch to Data</string>
 
@@ -30,4 +34,7 @@
         <item>Entertainment</item>
         <item>Income</item>
     </string-array>
+    <string name="title_activity_data">DataActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>
