@@ -50,7 +50,7 @@ public class ColorActivity extends AppCompatActivity {
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 1) {
+                if (saveFragment != null) {
                     saveFragment.refreshColors();
                 }
                 viewPager.setCurrentItem(tab.getPosition());

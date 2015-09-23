@@ -28,6 +28,7 @@ public class SaveAdapter extends RecyclerView.Adapter<SaveAdapter.ViewHolder> {
         customColors.remove(position);
         databaseHandler.delete(color);
         notifyItemRemoved(position);
+        notifyDataSetChanged();
     }
 
     @Override

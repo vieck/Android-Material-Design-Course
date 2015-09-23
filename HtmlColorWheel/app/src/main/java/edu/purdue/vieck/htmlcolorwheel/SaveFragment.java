@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 /**
  * Created by vieck on 6/27/15.
@@ -75,8 +76,12 @@ public class SaveFragment extends Fragment {
     }
 
     public void refreshColors() {
-        mSaveAdapter = new SaveAdapter(mContext);
-        recyclerView.setAdapter(mSaveAdapter);
+        try {
+            mSaveAdapter = new SaveAdapter(mContext);
+            recyclerView.setAdapter(mSaveAdapter);
+        } catch (NullPointerException ex) {
+
+        }
     }
 
     @Override
