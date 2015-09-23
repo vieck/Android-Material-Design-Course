@@ -80,7 +80,8 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         mPieChart.setDragDecelerationFrictionCoef(0.95f);
         //mTypeface = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
         mPieChart.setDrawHoleEnabled(true);
-        mPieChart.setHoleColor(Color.GREEN);
+        mPieChart.setHoleColor(Color.BLACK);
+        mPieChart.setCenterTextColor(Color.WHITE);
         mPieChart.setTransparentCircleColor(Color.WHITE);
         mPieChart.setHoleRadius(45f);
         mPieChart.setTransparentCircleRadius(45f);
@@ -143,7 +144,6 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         for (BudgetElement element : entertainment)
             entertainmentCount += element.getAmount();
 
-
         ArrayList<BudgetElement> utilities = mDatabaseHandler.getFilteredData("Utilities");
         utilitiesCount = 0;
         for (BudgetElement element : utilities)
@@ -159,16 +159,29 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         Log.d("Chart","Total Amount "+totalAmount);
         Log.d("Chart","Groceries Percentage "+groceryCount/totalAmount);
         ArrayList<String> xVals = new ArrayList<String>();
-        yVals.add(new Entry(groceryCount / totalAmount, 0));
-        yVals.add(new Entry( utilitiesCount / totalAmount, 1));
-        yVals.add(new Entry( entertainmentCount / totalAmount, 2));
-        yVals.add(new Entry( medicalCount / totalAmount, 3));
-        yVals.add(new Entry( incomeCount / totalAmount, 4));
-        xVals.add("Food/Groceries");
-        xVals.add("Utilities");
-        xVals.add("Entertainment");
-        xVals.add("Medical");
-        xVals.add("Income");
+        if (groceryCount != 0) {
+            yVals.add(new Entry(groceryCount / totalAmount, 0));
+            xVals.add("Food/Groceries");
+        }
+        if (utilitiesCount != 0) {
+            yVals.add(new Entry( utilitiesCount / totalAmount, 1));
+            xVals.add("Utilities");
+        }
+
+        if (entertainmentCount != 0) {
+            yVals.add(new Entry( entertainmentCount / totalAmount, 2));
+            xVals.add("Entertainment");
+        }
+
+        if (medicalCount != 0) {
+            yVals.add(new Entry( medicalCount / totalAmount, 3));
+            xVals.add("Medical");
+        }
+
+        if (incomeCount != 0) {
+            yVals.add(new Entry( incomeCount / totalAmount, 4));
+            xVals.add("Income");
+        }
 
         PieDataSet dataSet = new PieDataSet(yVals, "Budget");
         dataSet.setSliceSpace(5f);
@@ -207,6 +220,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         mPieChart.highlightValues(null);
 
         mPieChart.invalidate();
+        mPieChart.setText
     }
 
     @Override

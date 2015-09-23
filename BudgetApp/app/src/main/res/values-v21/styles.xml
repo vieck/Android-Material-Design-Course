@@ -4,7 +4,7 @@
         <item name="android:colorPrimary">@color/LimeGreen</item>
         <item name="android:colorPrimaryDark">@color/MediumSeaGreen</item>
         <item name="android:textColorPrimary">@color/BlueViolet</item>
-        <item name="android:background">@color/White</item>
+        <item name="android:textColorSecondary">@color/Fuchsia</item>
     </style>
 
     <style name="MyAppBarLayout" parent="AppTheme">
@@ -16,5 +16,12 @@
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:textSize">8pt</item>
+    </style>
+    
+    <style name="spinner_style">
+        <item name="android:background">@color/Black</item>
+        <item name="android:textColor">@color/DarkOrange</item>
+        <item name="android:textColorPrimary">@color/DarkOrange</item>
+        <item name="android:textColorSecondary">@color/DarkOrange</item>
     </style>
 </resources>

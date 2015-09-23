@@ -23,7 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/label_category"
-        android:layout_toEndOf="@+id/label_category"/>
+        android:layout_toEndOf="@+id/label_category"
+        style="@style/spinner_style"/>
 
     <TextView android:id="@+id/label_amount"
         android:layout_width="wrap_content"
