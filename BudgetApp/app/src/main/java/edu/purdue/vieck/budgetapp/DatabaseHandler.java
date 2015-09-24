@@ -9,6 +9,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -68,12 +69,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public Stack<BudgetElement> getAllData() {
         Stack<BudgetElement> mDataset = new Stack<>();
-        String selectQuery = "SELECT  * FROM " + TABLE_DATA;
+        String selectQuery = "SELECT  * FROM " + TABLE_DATA
+                + " ORDER BY " + COLUMN_MONTH + " ASC," + COLUMN_YEAR + " DESC";
 
         SQLiteDatabase database = this.getReadableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
-        Cursor test = database.rawQuery("SELECT  * FROM " + TABLE_DATA,null);
-        Log.d("Database", test.getCount() + "");
         cursor.moveToFirst();
         if (!cursor.isAfterLast()) {
             do {
@@ -98,15 +98,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return mDataset;
     }
 
-    public HashMap<Integer, BudgetElement> getAllMonths() {
-        HashMap<Integer,BudgetElement> mDataset = new HashMap<>();
-        String selectQuery = "SELECT * FROM " + TABLE_DATA + " GROUP BY " + COLUMN_MONTH;
+    public HashMap<Integer, List<BudgetElement>> getAllYears() {
+        HashMap<Integer,List<BudgetElement>> mDataset = new HashMap<>();
+        String selectQuery = "SELECT * FROM " + TABLE_DATA
+                + " ORDER BY " + COLUMN_MONTH + " DESC," + COLUMN_YEAR + " DESC";
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(selectQuery,null);
         if (cursor.moveToFirst()) {
             do {
                 BudgetElement budgetElement = new BudgetElement();
-                //budgetElement.setID(cursor.getLong(0));
                 budgetElement.setCategory(cursor.getString(1));
                 budgetElement.setAmount(cursor.getFloat(2));
                 if (cursor.getInt(3) == 0) {
@@ -117,8 +117,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 budgetElement.setDay(cursor.getInt(4));
                 budgetElement.setMonth(cursor.getInt(5));
                 budgetElement.setYear(cursor.getInt(6));
-
-                mDataset.put(budgetElement.getMonth(), budgetElement);
+                if (mDataset.get(budgetElement.getYear()) == null) {
+                    List<BudgetElement> list = new ArrayList<>();
+                    list.add(budgetElement);
+                    mDataset.put(budgetElement.getYear(), list);
+                } else {
+                    List<BudgetElement> list = mDataset.get(budgetElement.getYear());
+                    list.add(budgetElement);
+                    mDataset.put(budgetElement.getYear(), list);
+                }
             } while (cursor.moveToNext());
         }
         return mDataset;
@@ -127,7 +134,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public Stack<BudgetElement> getSpecificMonthYear(int month, int year) {
         Stack<BudgetElement> mDataset = new Stack<>();
         String selectQuery = "SELECT * FROM " + TABLE_DATA + " WHERE " + COLUMN_MONTH + " = " + month
-                + " and " + COLUMN_YEAR + " = " + year;
+                + " and " + COLUMN_YEAR + " = " + year
+                + " ORDER BY " + COLUMN_MONTH + " DESC," + COLUMN_YEAR + " DESC";
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(selectQuery,null);
         if (cursor.moveToFirst()) {

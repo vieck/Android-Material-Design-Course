@@ -11,13 +11,16 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.astuetz.PagerSlidingTabStrip;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class BudgetActivity extends AppCompatActivity {
@@ -107,17 +110,26 @@ public class BudgetActivity extends AppCompatActivity {
         ChartFragment chartFragment = new ChartFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("month",-1);
-        bundle.putInt("year",-1);
+        bundle.putInt("year", -1);
         chartFragment.setArguments(bundle);
         adapter.addFragment(chartFragment, "Chart");
-        HashMap<Integer, BudgetElement> months = mDatabaseHandler.getAllMonths();
-        for (Integer i : months.keySet()) {
-            bundle = new Bundle();
-            bundle.putInt("month",i);
-            bundle.putInt("year",months.get(i).getYear());
-            chartFragment = new ChartFragment();
-            chartFragment.setArguments(bundle);
-            adapter.addFragment(chartFragment,list[i-1] + " " + months.get(i).getYear());
+        HashMap<Integer, List<BudgetElement>> years = mDatabaseHandler.getAllYears();
+        ArrayList<Integer> uniqueMonths = new ArrayList<>();
+        for (Integer i : years.keySet()) {
+            List<BudgetElement> budgetElements = years.get(i);
+            for (BudgetElement element : budgetElements) {
+                bundle = new Bundle();
+                bundle.putInt("year", i);
+                bundle.putInt("month", element.getMonth());
+                chartFragment = new ChartFragment();
+                chartFragment.setArguments(bundle);
+                Log.d("Tabs", "YEAR " + i + " AND  MONTH " + element.getMonth() + " SIZE " + years.size());
+                if (!uniqueMonths.contains(element.getMonth())) {
+                    adapter.addFragment(chartFragment, list[element.getMonth() - 1] + " " + i);
+                    uniqueMonths.add(element.getMonth());
+                }
+            }
+            uniqueMonths = new ArrayList<>();
         }
 
         for (int i = 0; i < list.length; i++)

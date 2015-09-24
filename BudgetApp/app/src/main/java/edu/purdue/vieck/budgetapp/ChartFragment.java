@@ -160,8 +160,6 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
 
         float totalAmount = groceryCount + utilitiesCount + entertainmentCount + medicalCount + incomeCount;
         int totalCount = groceries.size() + utilities.size() + medical.size() + entertainment.size() + income.size();
-        Log.d("Chart","Total Amount "+totalAmount);
-        Log.d("Chart","Groceries Percentage "+groceryCount/totalAmount);
         ArrayList<String> xVals = new ArrayList<String>();
         if (incomeCount != 0) {
             yVals.add(new Entry( incomeCount / totalAmount, 4));
