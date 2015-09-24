@@ -16,13 +16,20 @@ import java.util.Stack;
 public class ChartRecyclerAdapter extends RecyclerView.Adapter<ChartRecyclerAdapter.mViewHolder>{
 
     Context context;
+    int month, year;
     DatabaseHandler databaseHandler;
     Stack<BudgetElement> mDataset = new Stack<>();
 
-    public ChartRecyclerAdapter(Context context) {
+    public ChartRecyclerAdapter(Context context, int month, int year) {
         this.context = context;
+        this.month = month;
+        this.year = year;
         databaseHandler = new DatabaseHandler(context);
-        mDataset = databaseHandler.getAllData();
+        if (month != -1 || year != -1) {
+            mDataset = databaseHandler.getSpecificMonthYear(month, year);
+        } else {
+            mDataset = databaseHandler.getAllData();
+        }
     }
 
     @Override
@@ -35,10 +42,10 @@ public class ChartRecyclerAdapter extends RecyclerView.Adapter<ChartRecyclerAdap
     @Override
     public void onBindViewHolder(mViewHolder viewHolder, int i) {
         final BudgetElement budgetElement = mDataset.get(i);
-        viewHolder.date.setText(budgetElement.getMonth() + "-"+budgetElement.getMonth() + "-" + budgetElement.getYear());
-        viewHolder.amount.setText(budgetElement.getAmount()+"");
-        viewHolder.expenses.setText(budgetElement.isType()+"");
-        viewHolder.income.setText(budgetElement.getCategory());
+        viewHolder.date.setText(budgetElement.getMonth() + "-" + budgetElement.getDay() + "-" + budgetElement.getYear());
+        viewHolder.amount.setText("" + budgetElement.getAmount());
+        viewHolder.expenses.setText("" + budgetElement.isType());
+        viewHolder.income.setText("" + budgetElement.getCategory());
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

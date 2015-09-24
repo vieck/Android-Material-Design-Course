@@ -53,7 +53,7 @@ public class SubmitFragment extends android.support.v4.app.DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_submit, container, false);
         mSpinner = (Spinner) view.findViewById(R.id.spinner_category);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(mContext, R.array.categoryarray,
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.categoryarray,
                 android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(adapter);
@@ -81,7 +81,7 @@ public class SubmitFragment extends android.support.v4.app.DialogFragment {
                 String spinnerV = mSpinner.getSelectedItem().toString();
                 Boolean toggleV = toggleButton.isChecked();
                 int day = datePicker.getDayOfMonth();
-                int month = datePicker.getMonth();
+                int month = datePicker.getMonth()+1;
                 int year = datePicker.getYear();
                 String entry = note.getText().toString();
                 BudgetElement budgetElement = new BudgetElement(

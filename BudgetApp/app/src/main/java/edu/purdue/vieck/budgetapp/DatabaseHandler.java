@@ -124,6 +124,34 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return mDataset;
     }
 
+    public Stack<BudgetElement> getSpecificMonthYear(int month, int year) {
+        Stack<BudgetElement> mDataset = new Stack<>();
+        String selectQuery = "SELECT * FROM " + TABLE_DATA + " WHERE " + COLUMN_MONTH + " = " + month
+                + " and " + COLUMN_YEAR + " = " + year;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery,null);
+        if (cursor.moveToFirst()) {
+            do {
+                BudgetElement budgetElement = new BudgetElement();
+                //budgetElement.setID(cursor.getLong(0));
+                budgetElement.setCategory(cursor.getString(1));
+                budgetElement.setAmount(cursor.getFloat(2));
+                if (cursor.getInt(3) == 0) {
+                    budgetElement.setType(false);
+                } else {
+                    budgetElement.setType(true);
+                }
+                budgetElement.setDay(cursor.getInt(4));
+                budgetElement.setMonth(cursor.getInt(5));
+                budgetElement.setYear(cursor.getInt(6));
+
+                mDataset.add(budgetElement);
+            } while (cursor.moveToNext());
+        }
+        sqLiteDatabase.close();
+        return mDataset;
+    }
+
     public ArrayList<BudgetElement> getFilteredData(String filter) {
         ArrayList<BudgetElement> mDataset = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + TABLE_DATA + " WHERE category LIKE '%" + filter + "%'";
@@ -147,6 +175,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 mDataset.add(budgetElement);
             } while (cursor.moveToNext());
         }
+        sqLiteDatabase.close();
         return mDataset;
     }
 
@@ -178,16 +207,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 mDataset.add(budgetElement);
             } while (cursor.moveToNext());
         }
+        sqLiteDatabase.close();
         return mDataset;
     }
 
     public void delete(BudgetElement budgetElement) {
         SQLiteDatabase database = this.getWritableDatabase();
         database.delete(TABLE_DATA, COLUMN_ID + " = " + "'"+budgetElement.getCategory()+"'", null);
+        database.close();
     }
 
     public void deleteAll() {
         SQLiteDatabase database = this.getWritableDatabase();
         database.delete(TABLE_DATA, null, null);
+        database.close();
     }
 }

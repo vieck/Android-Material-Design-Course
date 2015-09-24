@@ -19,9 +19,6 @@
     </style>
     
     <style name="spinner_style">
-        <item name="android:background">@color/Black</item>
-        <item name="android:textColor">@color/DarkOrange</item>
-        <item name="android:textColorPrimary">@color/DarkOrange</item>
-        <item name="android:textColorSecondary">@color/DarkOrange</item>
+        <item name="android:textColor">@color/Black</item>
     </style>
 </resources>

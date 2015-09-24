@@ -32,6 +32,9 @@ import java.util.ArrayList;
 
 
 public class ChartFragment extends Fragment implements OnChartValueSelectedListener {
+
+    int month, year;
+
     private PieChart mPieChart;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -39,7 +42,6 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
     private Button chartButton;
     DatabaseHandler mDatabaseHandler;
     private Context mContext;
-    Integer month;
 
     @Override
     public void onAttach(final Activity activity) {
@@ -56,16 +58,18 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
+        month = getArguments().getInt("month",-1);
+        year = getArguments().getInt("year",-1);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.budget_recycler_view);
-        mChartRecyclerAdapter = new ChartRecyclerAdapter(mContext);
+        mChartRecyclerAdapter = new ChartRecyclerAdapter(mContext, month, year);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setAdapter(mChartRecyclerAdapter);
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mChartRecyclerAdapter = new ChartRecyclerAdapter(mContext);
+                mChartRecyclerAdapter = new ChartRecyclerAdapter(mContext,month,year);
                 mRecyclerView.setAdapter(mChartRecyclerAdapter);
                 setData(3,100);
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -80,9 +84,9 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         mPieChart.setDragDecelerationFrictionCoef(0.95f);
         //mTypeface = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
         mPieChart.setDrawHoleEnabled(true);
-        mPieChart.setHoleColor(Color.BLACK);
-        mPieChart.setCenterTextColor(Color.WHITE);
-        mPieChart.setTransparentCircleColor(Color.WHITE);
+        //mPieChart.setHoleColor(Color.WHITE);
+        mPieChart.setCenterTextColor(Color.BLACK);
+        //mPieChart.setTransparentCircleColor(Color.WHITE);
         mPieChart.setHoleRadius(45f);
         mPieChart.setTransparentCircleRadius(45f);
         mPieChart.setDrawCenterText(true);
@@ -159,10 +163,11 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         Log.d("Chart","Total Amount "+totalAmount);
         Log.d("Chart","Groceries Percentage "+groceryCount/totalAmount);
         ArrayList<String> xVals = new ArrayList<String>();
-        if (groceryCount != 0) {
-            yVals.add(new Entry(groceryCount / totalAmount, 0));
-            xVals.add("Food/Groceries");
+        if (incomeCount != 0) {
+            yVals.add(new Entry( incomeCount / totalAmount, 4));
+            xVals.add("Income");
         }
+
         if (utilitiesCount != 0) {
             yVals.add(new Entry( utilitiesCount / totalAmount, 1));
             xVals.add("Utilities");
@@ -178,9 +183,9 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
             xVals.add("Medical");
         }
 
-        if (incomeCount != 0) {
-            yVals.add(new Entry( incomeCount / totalAmount, 4));
-            xVals.add("Income");
+        if (groceryCount != 0) {
+            yVals.add(new Entry(groceryCount / totalAmount, 0));
+            xVals.add("Groceries");
         }
 
         PieDataSet dataSet = new PieDataSet(yVals, "Budget");
@@ -220,7 +225,6 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         mPieChart.highlightValues(null);
 
         mPieChart.invalidate();
-        mPieChart.setText
     }
 
     @Override
