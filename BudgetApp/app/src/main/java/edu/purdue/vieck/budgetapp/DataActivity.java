@@ -5,7 +5,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,8 +12,6 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.astuetz.PagerSlidingTabStrip;
 
 public class DataActivity extends AppCompatActivity {
 
@@ -45,7 +42,7 @@ public class DataActivity extends AppCompatActivity {
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         currentActivity.startActivity(intent);
                         break;
-                    case R.id.data_list_nav_item:
+                    case R.id.nav_item_list:
                         intent = new Intent(currentActivity, DataActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         currentActivity.startActivity(intent);

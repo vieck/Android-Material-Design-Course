@@ -20,8 +20,12 @@
     <string name="year">Year</string>
 
     <!-- Nav Menu Strings -->
+    <string name="dashboard">Dashboard</string>
     <string name="charts">Charts</string>
     <string name="data">Data Logs</string>
+
+    <!-- FRAGMENT DASHBOARD -->
+    <string name="dashboard_title">Overview</string>
     
     <string name="switch_chart">Switch To Chart</string>
     <string name="switch_data">Switch to Data</string>
@@ -38,4 +42,5 @@
     <string name="title_activity_data">DataActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
 </resources>

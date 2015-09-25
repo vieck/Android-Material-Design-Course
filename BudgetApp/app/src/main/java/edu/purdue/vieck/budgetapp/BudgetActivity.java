@@ -17,11 +17,9 @@ import android.view.MenuItem;
 
 import com.astuetz.PagerSlidingTabStrip;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 
 public class BudgetActivity extends AppCompatActivity {
@@ -55,7 +53,7 @@ public class BudgetActivity extends AppCompatActivity {
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         currentActivity.startActivity(intent);
                         break;
-                    case R.id.data_list_nav_item:
+                    case R.id.nav_item_list:
                         intent = new Intent(currentActivity, DataActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         currentActivity.startActivity(intent);

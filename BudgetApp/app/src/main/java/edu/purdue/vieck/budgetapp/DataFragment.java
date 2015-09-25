@@ -21,7 +21,7 @@ public class DataFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_data_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_data, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.data_list_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mDataRecyclerAdapter = new DataRecyclerAdapter(getActivity(), "");

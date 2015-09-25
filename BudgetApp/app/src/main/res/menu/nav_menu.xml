@@ -2,10 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="all">
 
-        <item android:id="@+id/chart_nav_item"
-            android:title="@string/charts" />
+        <item android:id="@+id/nav_item_dashboard"
+            android:title="@string/dashboard"/>
 
-        <item android:id="@+id/data_list_nav_item"
+        <item android:id="@+id/chart_nav_item"
+            android:title="@string/charts"/>
+
+        <item android:id="@+id/nav_item_list"
             android:title="@string/data"/>
+
+
     </group>
 </menu>
