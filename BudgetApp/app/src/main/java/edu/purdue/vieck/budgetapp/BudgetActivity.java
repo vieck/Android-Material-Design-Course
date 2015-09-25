@@ -21,6 +21,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 
 public class BudgetActivity extends AppCompatActivity {
@@ -115,7 +116,21 @@ public class BudgetActivity extends AppCompatActivity {
         adapter.addFragment(chartFragment, "Chart");
         HashMap<Integer, List<BudgetElement>> years = mDatabaseHandler.getAllYears();
         ArrayList<Integer> uniqueMonths = new ArrayList<>();
-        for (Integer i : years.keySet()) {
+        Integer[] keys = years.keySet().toArray(new Integer[years.keySet().size()]);
+
+        //Insertion sorting hashmap keys
+        for (int i = 0; i < keys.length; i++) {
+            int temp = keys[i];
+            for (int j = i + 1; j < keys.length; j++) {
+                if (keys[j] > keys[i]) {
+                    int hold = keys[i];
+                    keys[i] = keys[j];
+                    keys[j] = hold;
+                }
+            }
+        }
+
+        for (int i : keys) {
             List<BudgetElement> budgetElements = years.get(i);
             for (BudgetElement element : budgetElements) {
                 bundle = new Bundle();

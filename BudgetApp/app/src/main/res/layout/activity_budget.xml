@@ -7,7 +7,6 @@
     android:fitsSystemWindows="true"
     tools:context=".BudgetActivity">
 
-
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/header_container"
         android:layout_width="match_parent"
