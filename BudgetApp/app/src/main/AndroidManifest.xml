@@ -8,11 +8,11 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".BudgetActivity"
+            android:name=".Activities.BudgetActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".DataActivity"
+            android:name=".Activities.DataActivity"
             android:label="@string/title_activity_data" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -26,13 +26,17 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".DashboardActivity"
+            android:name=".Activities.DashboardActivity"
             android:label="@string/title_activity_dashboard" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activities.GraphActivity"
+            android:label="@string/title_activity_graph" >
         </activity>
     </application>
 

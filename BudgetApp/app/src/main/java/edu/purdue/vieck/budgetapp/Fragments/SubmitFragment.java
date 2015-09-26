@@ -1,4 +1,4 @@
-package edu.purdue.vieck.budgetapp;
+package edu.purdue.vieck.budgetapp.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,6 +16,10 @@ import android.widget.Spinner;
 import android.widget.ToggleButton;
 
 import java.util.Calendar;
+
+import edu.purdue.vieck.budgetapp.DatabaseHandler;
+import edu.purdue.vieck.budgetapp.R;
+import edu.purdue.vieck.budgetapp.CustomObjects.BudgetElement;
 
 /**
  * Created by vieck on 7/13/15.
@@ -81,12 +85,12 @@ public class SubmitFragment extends android.support.v4.app.DialogFragment {
                 String spinnerV = mSpinner.getSelectedItem().toString();
                 Boolean toggleV = toggleButton.isChecked();
                 int day = datePicker.getDayOfMonth();
-                int month = datePicker.getMonth()+1;
+                int month = datePicker.getMonth() + 1;
                 int year = datePicker.getYear();
                 String entry = note.getText().toString();
                 BudgetElement budgetElement = new BudgetElement(
                         amountV, spinnerV, toggleV,
-                        day,month, year,entry);
+                        day, month, year, entry);
                 databaseHandler.addData(budgetElement);
                 showSnackBar("Added Data");
             }

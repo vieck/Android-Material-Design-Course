@@ -1,4 +1,4 @@
-package edu.purdue.vieck.budgetapp;
+package edu.purdue.vieck.budgetapp.CustomObjects;
 
 /**
  * Created by vieck on 7/14/15.
@@ -13,7 +13,7 @@ public class BudgetElement {
 
     }
 
-    public BudgetElement(float amount, String category, boolean type, int day, int month, int year, String note){
+    public BudgetElement(float amount, String category, boolean type, int day, int month, int year, String note) {
         this.amount = amount;
         this.category = category;
         this.type = type;

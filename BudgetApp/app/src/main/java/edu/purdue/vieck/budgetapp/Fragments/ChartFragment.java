@@ -1,4 +1,4 @@
-package edu.purdue.vieck.budgetapp;
+package edu.purdue.vieck.budgetapp.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -30,6 +30,11 @@ import com.github.mikephil.charting.utils.PercentFormatter;
 
 import java.util.ArrayList;
 
+import edu.purdue.vieck.budgetapp.DatabaseHandler;
+import edu.purdue.vieck.budgetapp.R;
+import edu.purdue.vieck.budgetapp.Adapters.ChartAdapter;
+import edu.purdue.vieck.budgetapp.CustomObjects.BudgetElement;
+
 
 public class ChartFragment extends Fragment implements OnChartValueSelectedListener {
 
@@ -38,7 +43,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
     private PieChart mPieChart;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    private ChartRecyclerAdapter mChartRecyclerAdapter;
+    private ChartAdapter mChartAdapter;
     private Button chartButton;
     DatabaseHandler mDatabaseHandler;
     private Context mContext;
@@ -58,20 +63,20 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
-        month = getArguments().getInt("month",-1);
-        year = getArguments().getInt("year",-1);
+        month = getArguments().getInt("month", -1);
+        year = getArguments().getInt("year", -1);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.budget_recycler_view);
-        mChartRecyclerAdapter = new ChartRecyclerAdapter(mContext, month, year);
+        mChartAdapter = new ChartAdapter(mContext, month, year);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        mRecyclerView.setAdapter(mChartRecyclerAdapter);
+        mRecyclerView.setAdapter(mChartAdapter);
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mChartRecyclerAdapter = new ChartRecyclerAdapter(mContext,month,year);
-                mRecyclerView.setAdapter(mChartRecyclerAdapter);
-                setData(3,100);
+                mChartAdapter = new ChartAdapter(mContext, month, year);
+                mRecyclerView.setAdapter(mChartAdapter);
+                setData(3, 100);
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -162,22 +167,22 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         int totalCount = groceries.size() + utilities.size() + medical.size() + entertainment.size() + income.size();
         ArrayList<String> xVals = new ArrayList<String>();
         if (incomeCount != 0) {
-            yVals.add(new Entry( incomeCount / totalAmount, 4));
+            yVals.add(new Entry(incomeCount / totalAmount, 4));
             xVals.add("Income");
         }
 
         if (utilitiesCount != 0) {
-            yVals.add(new Entry( utilitiesCount / totalAmount, 1));
+            yVals.add(new Entry(utilitiesCount / totalAmount, 1));
             xVals.add("Utilities");
         }
 
         if (entertainmentCount != 0) {
-            yVals.add(new Entry( entertainmentCount / totalAmount, 2));
+            yVals.add(new Entry(entertainmentCount / totalAmount, 2));
             xVals.add("Entertainment");
         }
 
         if (medicalCount != 0) {
-            yVals.add(new Entry( medicalCount / totalAmount, 3));
+            yVals.add(new Entry(medicalCount / totalAmount, 3));
             xVals.add("Medical");
         }
 

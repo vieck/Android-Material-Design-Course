@@ -21,4 +21,10 @@
     <style name="spinner_style">
         <item name="android:textColor">@color/Black</item>
     </style>
+
+    <!-- DASHBOARD STYLES -->
+    <style name="dashboard_item_label">
+        <item name="android:textSize">10pt</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>

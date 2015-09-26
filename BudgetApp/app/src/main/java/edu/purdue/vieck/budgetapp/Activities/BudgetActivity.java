@@ -1,4 +1,4 @@
-package edu.purdue.vieck.budgetapp;
+package edu.purdue.vieck.budgetapp.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,6 +20,12 @@ import com.astuetz.PagerSlidingTabStrip;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import edu.purdue.vieck.budgetapp.DatabaseHandler;
+import edu.purdue.vieck.budgetapp.R;
+import edu.purdue.vieck.budgetapp.CustomObjects.BudgetElement;
+import edu.purdue.vieck.budgetapp.Fragments.ChartFragment;
+import edu.purdue.vieck.budgetapp.Fragments.SubmitFragment;
 
 
 public class BudgetActivity extends AppCompatActivity {
@@ -48,6 +54,11 @@ public class BudgetActivity extends AppCompatActivity {
                 int id = menuItem.getItemId();
                 Intent intent;
                 switch (id) {
+                    case R.id.nav_item_dashboard:
+                        intent = new Intent(currentActivity, DashboardActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        currentActivity.startActivity(intent);
+                        break;
                     case R.id.chart_nav_item:
                         intent = new Intent(currentActivity, BudgetActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -108,7 +119,7 @@ public class BudgetActivity extends AppCompatActivity {
         String[] list = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         ChartFragment chartFragment = new ChartFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("month",-1);
+        bundle.putInt("month", -1);
         bundle.putInt("year", -1);
         chartFragment.setArguments(bundle);
         adapter.addFragment(chartFragment, "Chart");

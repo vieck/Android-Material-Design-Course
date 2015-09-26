@@ -6,10 +6,10 @@
             android:title="@string/dashboard"/>
 
         <item android:id="@+id/chart_nav_item"
-            android:title="@string/charts"/>
+            android:title="@string/charts" />
 
         <item android:id="@+id/nav_item_list"
-            android:title="@string/data"/>
+            android:title="@string/data" />
 
 
     </group>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="edu.purdue.vieck.budgetapp.DashboardActivity">
+    tools:context="edu.purdue.vieck.budgetapp.Activities.DashboardActivity">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/header_container"
@@ -26,7 +26,7 @@
                 android:minHeight="?attr/actionBarSize" />
 
             <FrameLayout
-                android:id="@+id/fragment_container"
+                android:id="@+id/fragment_container_dashboard"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </android.support.design.widget.AppBarLayout>

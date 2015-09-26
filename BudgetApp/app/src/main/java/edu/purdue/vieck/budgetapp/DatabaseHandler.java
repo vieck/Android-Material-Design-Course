@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
+import edu.purdue.vieck.budgetapp.CustomObjects.BudgetElement;
+
 /**
  * Created by vieck on 7/22/15.
  */
@@ -89,9 +91,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 budgetElement.setDay(cursor.getInt(4));
                 budgetElement.setMonth(cursor.getInt(5));
                 budgetElement.setYear(cursor.getInt(6));
-                Log.d("Database","Category" + budgetElement.getCategory() +
-                "\nAmount "+ budgetElement.getAmount() +
-                "\nType "+budgetElement.isType());
+                Log.d("Database", "Category" + budgetElement.getCategory() +
+                        "\nAmount " + budgetElement.getAmount() +
+                        "\nType " + budgetElement.isType());
                 mDataset.add(budgetElement);
             } while (cursor.moveToNext());
         }
@@ -99,11 +101,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public HashMap<Integer, List<BudgetElement>> getAllYears() {
-        HashMap<Integer,List<BudgetElement>> mDataset = new HashMap<>();
+        HashMap<Integer, List<BudgetElement>> mDataset = new HashMap<>();
         String selectQuery = "SELECT * FROM " + TABLE_DATA
                 + " ORDER BY " + COLUMN_MONTH + " DESC," + COLUMN_YEAR + " DESC";
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery,null);
+        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
                 BudgetElement budgetElement = new BudgetElement();
@@ -137,7 +139,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + " and " + COLUMN_YEAR + " = " + year
                 + " ORDER BY " + COLUMN_MONTH + " DESC," + COLUMN_YEAR + " DESC";
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery,null);
+        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
                 BudgetElement budgetElement = new BudgetElement();
@@ -164,7 +166,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ArrayList<BudgetElement> mDataset = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + TABLE_DATA + " WHERE category LIKE '%" + filter + "%'";
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery,null);
+        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
                 BudgetElement budgetElement = new BudgetElement();
@@ -194,9 +196,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + COLUMN_DAY + " LIKE '%" + searchParameters + "%' or "
                 + COLUMN_MONTH + " LIKE '%" + searchParameters + "%' or "
                 + COLUMN_YEAR + " LIKE '%" + searchParameters + "%' or "
-                +COLUMN_NOTE + " LIKE '%" + searchParameters + "%'";
+                + COLUMN_NOTE + " LIKE '%" + searchParameters + "%'";
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery,null);
+        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
                 BudgetElement budgetElement = new BudgetElement();
@@ -221,7 +223,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void delete(BudgetElement budgetElement) {
         SQLiteDatabase database = this.getWritableDatabase();
-        database.delete(TABLE_DATA, COLUMN_ID + " = " + "'"+budgetElement.getCategory()+"'", null);
+        database.delete(TABLE_DATA, COLUMN_ID + " = " + "'" + budgetElement.getCategory() + "'", null);
         database.close();
     }
 
